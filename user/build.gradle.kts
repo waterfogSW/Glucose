@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-     id("org.springframework.boot") version "3.2.0"
-    id("io.spring.dependency-management") version "1.1.4"
-    kotlin("jvm") version "1.9.21"
-    kotlin("plugin.jpa") version "1.9.21"
-    kotlin("plugin.spring") version "1.9.21"
+    id("org.springframework.boot") version user.Version.SPRING_BOOT
+    id("io.spring.dependency-management") version user.Version.SPRING_BOOT_DEPENDENCY_MANAGEMENT
+    kotlin("jvm") version user.Version.KOTLIN
+    kotlin("plugin.jpa") version user.Version.KOTLIN
+    kotlin("plugin.spring") version user.Version.KOTLIN
 }
 
 allprojects {
@@ -29,20 +29,20 @@ subprojects {
     apply(plugin = "io.spring.dependency-management")
 
     dependencies {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.21")
-        implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.21")
-        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:3.2.0")
-        testImplementation("io.mockk:mockk:1.13.7")
-        testImplementation("com.ninja-squad:springmockk:4.0.2")
-        testImplementation("io.kotest:kotest-runner-junit5:5.6.0")
-        testImplementation("io.kotest:kotest-assertions-core:5.6.0")
-        testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.3")
-        testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.0")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib:${user.Version.KOTLIN}")
+        implementation("org.jetbrains.kotlin:kotlin-reflect:${user.Version.KOTLIN}")
+        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:${user.Version.SPRING_BOOT}")
+        testImplementation("io.mockk:mockk:${user.Version.MOCKK}")
+        testImplementation("com.ninja-squad:springmockk:${user.Version.SPRINGMOCKK}")
+        testImplementation("io.kotest:kotest-runner-junit5:${user.Version.KOTEST}")
+        testImplementation("io.kotest:kotest-assertions-core:${user.Version.KOTEST}")
+        testImplementation("io.kotest.extensions:kotest-extensions-spring:${user.Version.KOTEST_EXTENSIONS_SPRING}")
+        testImplementation("org.springframework.boot:spring-boot-starter-test:${user.Version.SPRING_BOOT}")
     }
 
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(17))
+            languageVersion.set(JavaLanguageVersion.of(user.Version.JAVA))
         }
     }
 
@@ -55,7 +55,7 @@ subprojects {
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs += "-Xjsr305=strict"
-            jvmTarget = "17"
+            jvmTarget = user.Version.JAVA
         }
     }
 

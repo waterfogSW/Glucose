@@ -7,5 +7,5 @@ bootJar.enabled = false
 jar.enabled = true
 
 dependencies {
-    implementation("com.github.f4b6a3:ulid-creator:5.2.2")
+    implementation("com.github.f4b6a3:ulid-creator:${user.Version.ULID_CREATOR}")
 }
