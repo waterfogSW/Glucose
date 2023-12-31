@@ -1,7 +1,7 @@
 rootProject.name = "user"
 
 include("user-domain")
-include("user-usecase")
+include("user-application")
 
 // common
 include(":common-ulid")
