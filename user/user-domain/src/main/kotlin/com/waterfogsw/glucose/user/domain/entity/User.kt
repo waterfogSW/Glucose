@@ -24,13 +24,11 @@ data class User(
         fun create(
             username: String,
             email: Email,
-            statusMessage: String? = null,
             profileImage: URL? = null,
         ): User {
             return User(
                 username = username,
                 email = email,
-                statusMessage = statusMessage,
                 profileImage = profileImage,
             )
         }
