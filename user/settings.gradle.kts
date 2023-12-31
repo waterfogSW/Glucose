@@ -3,6 +3,10 @@ rootProject.name = "user"
 include("user-domain")
 include("user-usecase")
 
+// common
+include(":ulid")
+project(":ulid").projectDir = file("./user-common/ulid")
+
 // boostrap
 include(":user-bootstrap-http")
 project(":user-bootstrap-http").projectDir = file("user-bootstrap/http")

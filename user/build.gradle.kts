@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.2.0"
+     id("org.springframework.boot") version "3.2.0"
     id("io.spring.dependency-management") version "1.1.4"
     kotlin("jvm") version "1.9.21"
     kotlin("plugin.jpa") version "1.9.21"
@@ -9,7 +9,7 @@ plugins {
 }
 
 allprojects {
-    group = "com.bokeh"
+    group = "com.waterfogsw"
     version = "0.0.1-SNAPSHOT"
 
     repositories {
@@ -31,7 +31,7 @@ subprojects {
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.21")
         implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.21")
-        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:3.2.0")
         testImplementation("io.mockk:mockk:1.13.7")
         testImplementation("com.ninja-squad:springmockk:4.0.2")
         testImplementation("io.kotest:kotest-runner-junit5:5.6.0")
