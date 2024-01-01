@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service
 @Service
 class SocialLoginUser(
     private val userRepository: UserRepository,
-    private val userLoginInfoRepository: UserSocialLoginInfoRepository,
-    private val socialLoginPort: SocialLoginPort
+    private val socialLoginPort: SocialLoginPort,
+    private val socialLoginInfoRepository: UserSocialLoginInfoRepository
 ) : SocialLoginUserUseCase {
 
     override fun invoke(command: SocialLoginUserUseCase.Command): SocialLoginUserUseCase.Result {
@@ -19,7 +19,11 @@ class SocialLoginUser(
             authorizationCode = command.authorizationCode,
             provider = command.provider,
         )
-        val userLoginInfo: UserLoginInfo? = userLoginInfoRepository.findBySub(userInfo.sub)
+
+        val userLoginInfo: UserLoginInfo? = socialLoginInfoRepository.findBySubAndProvider(
+            sub = userInfo.sub,
+            provider = command.provider
+        )
 
         if (userLoginInfo == null) {
             val user: User = User.create(
@@ -32,7 +36,7 @@ class SocialLoginUser(
                 sub = userInfo.sub,
                 userId = user.id,
                 provider = command.provider
-            ).apply { userLoginInfoRepository.save(this) }
+            ).apply { socialLoginInfoRepository.save(this) }
 
             return SocialLoginUserUseCase.Result.Success(userId = user.id)
         }
