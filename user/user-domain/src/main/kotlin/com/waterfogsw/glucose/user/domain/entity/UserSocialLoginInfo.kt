@@ -4,7 +4,7 @@ import com.exapmle.ulid.UlidUtil
 import java.time.LocalDateTime
 import java.util.*
 
-data class UserLoginInfo(
+data class UserSocialLoginInfo(
     val id: UUID = UlidUtil.createUlid(),
     val sub: String,
     val userId: UUID,
@@ -16,8 +16,8 @@ data class UserLoginInfo(
             sub: String,
             userId: UUID,
             provider: Provider,
-        ): UserLoginInfo {
-            return UserLoginInfo(
+        ): UserSocialLoginInfo {
+            return UserSocialLoginInfo(
                 sub = sub,
                 userId = userId,
                 provider = provider,

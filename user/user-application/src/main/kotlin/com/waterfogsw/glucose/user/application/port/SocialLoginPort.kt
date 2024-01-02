@@ -16,6 +16,6 @@ interface SocialLoginPort {
         val sub: String,
         val name: String,
         val email: Email,
-        val profileImage: URL?,
+        val profileImage: URL? = null,
     )
 }

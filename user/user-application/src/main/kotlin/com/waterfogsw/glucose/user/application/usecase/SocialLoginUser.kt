@@ -4,7 +4,7 @@ import com.waterfogsw.glucose.user.application.port.SocialLoginPort
 import com.waterfogsw.glucose.user.application.port.UserRepository
 import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepository
 import com.waterfogsw.glucose.user.domain.entity.User
-import com.waterfogsw.glucose.user.domain.entity.UserLoginInfo
+import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import org.springframework.stereotype.Service
 
 @Service
@@ -20,19 +20,19 @@ class SocialLoginUser(
             provider = command.provider,
         )
 
-        val userLoginInfo: UserLoginInfo? = socialLoginInfoRepository.findBySubAndProvider(
+        val userSocialLoginInfo: UserSocialLoginInfo? = socialLoginInfoRepository.findBySubAndProvider(
             sub = userInfo.sub,
             provider = command.provider
         )
 
-        if (userLoginInfo == null) {
+        if (userSocialLoginInfo == null) {
             val user: User = User.create(
                 username = userInfo.name,
                 email = userInfo.email,
                 profileImage = userInfo.profileImage
             ).apply { userRepository.save(this) }
 
-            UserLoginInfo.create(
+            UserSocialLoginInfo.create(
                 sub = userInfo.sub,
                 userId = user.id,
                 provider = command.provider
@@ -41,7 +41,7 @@ class SocialLoginUser(
             return SocialLoginUserUseCase.Result.Success(userId = user.id)
         }
 
-        return SocialLoginUserUseCase.Result.Success(userId = userLoginInfo.userId)
+        return SocialLoginUserUseCase.Result.Success(userId = userSocialLoginInfo.userId)
     }
 
 }
