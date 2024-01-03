@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.application.usecase
 
-import com.waterfogsw.glucose.user.application.port.SocialLoginPort
+import com.waterfogsw.glucose.user.application.port.OAuth2LoginPort
 import com.waterfogsw.glucose.user.application.port.UserRepository
 import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepository
 import com.waterfogsw.glucose.user.domain.entity.User
@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service
 @Service
 class SocialLoginUser(
     private val userRepository: UserRepository,
-    private val socialLoginPort: SocialLoginPort,
+    private val oAuth2LoginPort: OAuth2LoginPort,
     private val socialLoginInfoRepository: UserSocialLoginInfoRepository
 ) : SocialLoginUserUseCase {
 
     override fun invoke(command: SocialLoginUserUseCase.Command): SocialLoginUserUseCase.Result {
-        val userInfo: SocialLoginPort.UserInfo = socialLoginPort.getUserInfo(
+        val userInfo: OAuth2LoginPort.UserInfo = oAuth2LoginPort.getUserInfo(
             authorizationCode = command.authorizationCode,
             oAuth2Provider = command.oAuth2Provider,
         )

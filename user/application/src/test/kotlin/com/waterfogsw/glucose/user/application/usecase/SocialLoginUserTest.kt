@@ -19,7 +19,7 @@ class SocialLoginUserTest : DescribeSpec({
                 val userRepository = UserRepositorySpy()
                 val userSocialLoginInfoRepository = UserSocialLoginInfoRepositorySpy()
                 val sut = SocialLoginUser(
-                    socialLoginPort = socialLoginPort,
+                    oAuth2LoginPort = socialLoginPort,
                     userRepository = userRepository,
                     socialLoginInfoRepository = userSocialLoginInfoRepository
                 )
@@ -47,7 +47,7 @@ class SocialLoginUserTest : DescribeSpec({
                 val userRepository = UserRepositorySpy()
 
                 val sut = SocialLoginUser(
-                    socialLoginPort = socialLoginPort,
+                    oAuth2LoginPort = socialLoginPort,
                     userRepository = userRepository,
                     socialLoginInfoRepository = userSocialLoginInfoRepository
                 )
