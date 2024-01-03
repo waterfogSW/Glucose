@@ -6,6 +6,9 @@ val bootJar: BootJar by tasks
 bootJar.enabled = false
 jar.enabled = true
 
+plugins {
+    `java-test-fixtures`
+}
 
 dependencies {
     implementation(project(":common:ulid"))

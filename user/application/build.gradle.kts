@@ -12,4 +12,5 @@ dependencies {
     implementation(project(":user:domain"))
 
     implementation("org.springframework.boot:spring-boot:${Version.SPRING_BOOT}")
+    testImplementation(testFixtures(project(":user:domain")))
 }

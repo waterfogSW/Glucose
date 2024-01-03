@@ -5,6 +5,7 @@ import com.waterfogsw.glucose.user.application.port.stub.UserRepositorySpy
 import com.waterfogsw.glucose.user.application.port.stub.UserSocialLoginInfoRepositorySpy
 import com.waterfogsw.glucose.user.domain.entity.Provider
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
+import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfoTestFixture
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import java.util.*
@@ -37,12 +38,7 @@ class SocialLoginUserTest : DescribeSpec({
 
         context("이전에 소셜 로그인을 통해 가입한 적이 있으면") {
 
-            val userSocialLoginInfoFixture = UserSocialLoginInfo(
-                id = UUID.randomUUID(),
-                sub = "test",
-                userId = UUID.randomUUID(),
-                provider = Provider.KAKAO
-            )
+            val userSocialLoginInfoFixture: UserSocialLoginInfo = UserSocialLoginInfoTestFixture.create()
             val userSocialLoginInfoRepository = UserSocialLoginInfoRepositorySpy()
             userSocialLoginInfoRepository.save(userSocialLoginInfoFixture)
 
