@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.domain.entity
 
-import com.exapmle.ulid.UlidUtil
+import com.waterfogsw.gluecose.user.common.ulid.UlidUtil
 import java.time.LocalDateTime
 import java.util.*
 
