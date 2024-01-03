@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.application.usecase
 
-import com.waterfogsw.glucose.user.domain.entity.Provider
+import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
 import java.util.*
 
 
@@ -10,7 +10,7 @@ fun interface SocialLoginUserUseCase {
 
     data class Command(
         val authorizationCode: String,
-        val provider: Provider,
+        val oAuth2Provider: OAuth2Provider,
     )
 
     sealed class Result {

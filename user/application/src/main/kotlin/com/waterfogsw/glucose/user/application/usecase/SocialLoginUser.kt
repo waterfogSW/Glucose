@@ -17,12 +17,12 @@ class SocialLoginUser(
     override fun invoke(command: SocialLoginUserUseCase.Command): SocialLoginUserUseCase.Result {
         val userInfo: SocialLoginPort.UserInfo = socialLoginPort.getUserInfo(
             authorizationCode = command.authorizationCode,
-            provider = command.provider,
+            oAuth2Provider = command.oAuth2Provider,
         )
 
         val userSocialLoginInfo: UserSocialLoginInfo? = socialLoginInfoRepository.findBySubAndProvider(
             sub = userInfo.sub,
-            provider = command.provider
+            oAuth2Provider = command.oAuth2Provider
         )
 
         if (userSocialLoginInfo == null) {
@@ -35,7 +35,7 @@ class SocialLoginUser(
             UserSocialLoginInfo.create(
                 sub = userInfo.sub,
                 userId = user.id,
-                provider = command.provider
+                oAuth2Provider = command.oAuth2Provider
             ).apply { socialLoginInfoRepository.save(this) }
 
             return SocialLoginUserUseCase.Result.Success(userId = user.id)

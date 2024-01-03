@@ -3,12 +3,11 @@ package com.waterfogsw.glucose.user.application.usecase
 import com.waterfogsw.glucose.user.application.port.stub.SocialLoginPortStub
 import com.waterfogsw.glucose.user.application.port.stub.UserRepositorySpy
 import com.waterfogsw.glucose.user.application.port.stub.UserSocialLoginInfoRepositorySpy
-import com.waterfogsw.glucose.user.domain.entity.Provider
+import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
-import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfoTestFixture
+import com.waterfogsw.glucose.user.domain.entity.OAuth2UserInfoTestFixture
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import java.util.*
 
 class SocialLoginUserTest : DescribeSpec({
 
@@ -26,7 +25,7 @@ class SocialLoginUserTest : DescribeSpec({
                 )
 
                 // act
-                val command = SocialLoginUserUseCase.Command("test", Provider.KAKAO)
+                val command = SocialLoginUserUseCase.Command("test", OAuth2Provider.KAKAO)
                 val result: SocialLoginUserUseCase.Result = sut.invoke(command)
 
                 // assert
@@ -38,7 +37,7 @@ class SocialLoginUserTest : DescribeSpec({
 
         context("이전에 소셜 로그인을 통해 가입한 적이 있으면") {
 
-            val userSocialLoginInfoFixture: UserSocialLoginInfo = UserSocialLoginInfoTestFixture.create()
+            val userSocialLoginInfoFixture: UserSocialLoginInfo = OAuth2UserInfoTestFixture.create()
             val userSocialLoginInfoRepository = UserSocialLoginInfoRepositorySpy()
             userSocialLoginInfoRepository.save(userSocialLoginInfoFixture)
 
@@ -54,7 +53,7 @@ class SocialLoginUserTest : DescribeSpec({
                 )
 
                 // act
-                val command = SocialLoginUserUseCase.Command("test", Provider.KAKAO)
+                val command = SocialLoginUserUseCase.Command("test", OAuth2Provider.KAKAO)
                 val result: SocialLoginUserUseCase.Result = sut.invoke(command)
 
                 // assert
