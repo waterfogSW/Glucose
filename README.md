@@ -1,7 +1,7 @@
 # 포도당 
 
 <p align="center">
-  <img src=".docs/image/logo.png" width="200px" height="200px" alt="logo" />
+  <img src="docs/image/logo.png" width="200px" height="200px" alt="logo" />
 </p>
 
 ## 개요
@@ -29,4 +29,4 @@
 
 ## System Architecture
 
-![img.png](.docs/image/Service%20Architecture.png)
+![img.png](docs/image/Service%20Architecture.png)
