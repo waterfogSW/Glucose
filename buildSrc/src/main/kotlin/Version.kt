@@ -14,5 +14,5 @@ object Version {
     const val KOTEST_EXTENSIONS_SPRING = "1.1.3"
 
     const val ULID_CREATOR = "5.2.2"
-
+    const val OPENFEIGN = "4.0.1"
 }
