@@ -18,8 +18,8 @@ class OidcAdapter(
     ): OidcPort.UserInfo {
         val loginStrategy: OidcStrategy = oidcStrategyFactory.getStrategy(oAuth2Provider)
 
-        val idToken: String = loginStrategy.getIdToken(authorizationCode)
-        val idTokenInfo: OidcStrategy.IdTokenInfo = loginStrategy.getUserInfoByIdToken(idToken)
+        val idToken: String = loginStrategy.getToken(authorizationCode)
+        val idTokenInfo: OidcStrategy.IdTokenInfo = loginStrategy.getTokenInfo(idToken)
 
         return OidcPort.UserInfo(
             sub = idTokenInfo.sub,

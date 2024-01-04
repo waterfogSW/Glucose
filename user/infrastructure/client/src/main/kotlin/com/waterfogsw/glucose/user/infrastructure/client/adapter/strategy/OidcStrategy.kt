@@ -5,9 +5,9 @@ import com.waterfogsw.glucose.user.domain.vo.URL
 
 interface OidcStrategy {
 
-    fun getIdToken(authorizationCode: String): String
+    fun getToken(authorizationCode: String): String
 
-    fun getUserInfoByIdToken(idToken: String): IdTokenInfo
+    fun getTokenInfo(idToken: String): IdTokenInfo
 
     data class IdTokenInfo(
         val sub: String,

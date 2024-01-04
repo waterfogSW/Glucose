@@ -9,26 +9,29 @@ import com.waterfogsw.glucose.user.infrastructure.client.common.properties.OidcC
 import org.springframework.stereotype.Component
 
 @Component
-class KakaoOidcStrategy (
+class KakaoOidcStrategy(
     private val kakaoOidcApi: KakaoOidcApi,
     private val oidcClientProperties: OidcClientProperties,
-): OidcStrategy {
+) : OidcStrategy {
     companion object {
         private const val PROVIDER_NAME = "kakao"
     }
 
-    override fun getIdToken(authorizationCode: String): String {
+    private val client: OidcClientProperties.Client
+        get() = oidcClientProperties.clients[PROVIDER_NAME]
+            ?: throw IllegalStateException("Client properties for $PROVIDER_NAME not found.")
+
+    override fun getToken(authorizationCode: String): String {
         val getTokenRequest = GetTokenRequest(
-            clientId = oidcClientProperties.clients[PROVIDER_NAME]!!.clientId,
-            clientSecret = oidcClientProperties.clients[PROVIDER_NAME]!!.clientSecret,
-            redirectUri = oidcClientProperties.clients[PROVIDER_NAME]!!.redirectUri,
+            clientId = client.clientId,
+            clientSecret = client.clientSecret,
+            redirectUri = client.redirectUri,
             code = authorizationCode,
         )
-
         return kakaoOidcApi.getToken(getTokenRequest).idToken
     }
 
-    override fun getUserInfoByIdToken(idToken: String): OidcStrategy.IdTokenInfo {
+    override fun getTokenInfo(idToken: String): OidcStrategy.IdTokenInfo {
         val response: GetTokenInfoResponse = kakaoOidcApi.getTokenInfo(idToken)
 
         return OidcStrategy.IdTokenInfo(
