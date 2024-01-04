@@ -4,7 +4,7 @@ import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
 import com.waterfogsw.glucose.user.domain.vo.Email
 import com.waterfogsw.glucose.user.domain.vo.URL
 
-interface OAuth2LoginPort {
+interface OidcPort {
 
     fun getUserInfo(
         authorizationCode: String,
