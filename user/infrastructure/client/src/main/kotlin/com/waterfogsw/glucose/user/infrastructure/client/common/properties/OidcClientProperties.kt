@@ -16,7 +16,8 @@ data class OidcClientProperties @ConstructorBinding constructor(
     )
 
     data class Provider(
-        val tokenUrl: String,
-        val tokenInfoUrl: String,
+        val baseUrl: String,
+        val tokenEndpoint: String,
+        val tokenInfoEndpoint: String,
     )
 }

@@ -6,5 +6,6 @@ oidc:
       redirect-uri: ${KAKAO_REDIRECT_URI}
   providers:
     kakao:
-      token-url: ${KAKAO_TOKEN_URI}
-      token-info-url: ${KAKAO_USER_INFO_URI}
+      base-url: ${KAKAO_OAUTH_BASE_URL}
+      token-endpoint: ${KAKAO_OAUTH_TOKEN_ENDPOINT}
+      token-info-endpoint: ${KAKAO_OAUTH_USER_INFO_ENDPOINT}
