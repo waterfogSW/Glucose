@@ -1,0 +1,9 @@
+server:
+  port: 8080
+  shutdown: graceful
+spring:
+  profiles:
+    active: local
+    include:
+      - client
+      - application

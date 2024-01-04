@@ -3,7 +3,7 @@ object Version {
     const val JAVA = "17"
 
     // plugins
-    const val SPRING_BOOT = "3.2.0"
+    const val SPRING_BOOT = "3.2.1"
     const val SPRING_BOOT_DEPENDENCY_MANAGEMENT = "1.1.4"
     const val KOTLIN = "1.9.21"
 
@@ -14,7 +14,9 @@ object Version {
     const val KOTEST_EXTENSIONS_SPRING = "1.1.3"
 
     const val ULID_CREATOR = "5.2.2"
-    const val OPENFEIGN = "4.0.1"
+    const val OPENFEIGN = "4.1.0"
 
     const val JJWT = "0.12.3"
+
+    const val SPRING_COULD = "2023.0.0"
 }
