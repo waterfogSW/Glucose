@@ -15,4 +15,6 @@ object Version {
 
     const val ULID_CREATOR = "5.2.2"
     const val OPENFEIGN = "4.0.1"
+
+    const val JJWT = "0.12.3"
 }
