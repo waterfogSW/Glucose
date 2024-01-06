@@ -12,4 +12,6 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot:${Version.SPRING_BOOT}")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:${Version.OPENFEIGN}")
+
+    testFixturesImplementation("org.wiremock:wiremock:${Version.WIREMOCK}")
 }

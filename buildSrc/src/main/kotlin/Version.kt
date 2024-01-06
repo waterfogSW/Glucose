@@ -19,4 +19,5 @@ object Version {
     const val JJWT = "0.12.3"
 
     const val SPRING_COULD = "2023.0.0"
+    const val WIREMOCK = "3.3.1"
 }
