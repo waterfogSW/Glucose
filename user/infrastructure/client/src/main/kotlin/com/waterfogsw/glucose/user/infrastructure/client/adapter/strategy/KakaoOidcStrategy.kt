@@ -31,7 +31,9 @@ class KakaoOidcStrategy(
     }
 
     override fun getTokenInfo(idToken: String): OidcStrategy.IdTokenInfo {
-        val response: KakaoOidcApiDto.GetTokenInfoResponse = kakaoOidcApi.getTokenInfo(idToken)
+        val getTokenInfoRequest = KakaoOidcApiDto.GetTokenInfoRequest(idToken = idToken)
+        val response: KakaoOidcApiDto.GetTokenInfoResponse =
+            kakaoOidcApi.getTokenInfo(getTokenInfoRequest)
 
         return OidcStrategy.IdTokenInfo(
             sub = response.sub,

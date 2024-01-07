@@ -58,7 +58,7 @@ class KakaoOidcApiDto {
      * @property idToken ID 토큰
      * @see <a href="https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#oidc-get-id-token-info">토큰 정보 조회</a>
      */
-    data class GetIdTokenInfoRequest(
+    data class GetTokenInfoRequest(
         @FormProperty("id_token")
         var idToken: String,
     )

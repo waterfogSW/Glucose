@@ -26,7 +26,7 @@ interface KakaoOidcApi {
     )
     fun getTokenInfo(
         @RequestBody
-        request: KakaoOidcApiDto.GetIdTokenInfoRequest
+        request: KakaoOidcApiDto.GetTokenInfoRequest
     ): KakaoOidcApiDto.GetTokenInfoResponse
 
 }
