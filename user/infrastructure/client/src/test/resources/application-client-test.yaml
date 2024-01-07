@@ -1,0 +1,11 @@
+oidc:
+  clients:
+    kakao:
+      client-id: test
+      client-secret: test
+      redirect-uri: http://localhost:8080/oauth2/callback/kakao
+  providers:
+    kakao:
+      base-url: https://localhost:443
+      token-endpoint: /oauth/token
+      token-info-endpoint: /oauth/tokeninfo

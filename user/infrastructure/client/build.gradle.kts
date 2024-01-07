@@ -13,5 +13,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot:${Version.SPRING_BOOT}")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign:${Version.OPENFEIGN}")
 
-    testFixturesImplementation("org.wiremock:wiremock:${Version.WIREMOCK}")
+    testFixturesImplementation("org.springframework.boot:spring-boot-starter-web:${Version.SPRING_BOOT}")
+    testFixturesImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner:${Version.SPRING_COULD_CONTRACT}")
+    testFixturesImplementation("org.springframework.boot:spring-boot-starter-test:${Version.SPRING_BOOT}")
 }
