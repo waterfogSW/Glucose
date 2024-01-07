@@ -1,5 +1,6 @@
 package com.waterfogsw.glucose.user.infrastructure.client.common.config
 
+import feign.Logger
 import feign.Retryer
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.cloud.openfeign.EnableFeignClients
@@ -16,6 +17,11 @@ class ClientConfig {
     @Bean
     fun retryer(): Retryer.Default {
         return Retryer.Default(100, 1000, 5)
+    }
+
+    @Bean
+    fun feignLoggerLevel(): Logger.Level {
+        return Logger.Level.FULL
     }
 
 }
