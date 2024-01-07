@@ -3,8 +3,7 @@ package com.waterfogsw.glucose.user.infrastructure.client.adapter.strategy
 import com.waterfogsw.glucose.user.domain.vo.Email
 import com.waterfogsw.glucose.user.domain.vo.URL
 import com.waterfogsw.glucose.user.infrastructure.client.api.KakaoOidcApi
-import com.waterfogsw.glucose.user.infrastructure.client.api.dto.GetTokenInfoResponse
-import com.waterfogsw.glucose.user.infrastructure.client.api.dto.GetTokenRequest
+import com.waterfogsw.glucose.user.infrastructure.client.api.dto.KakaoOidcApiDto
 import com.waterfogsw.glucose.user.infrastructure.client.common.properties.OidcClientProperties
 import org.springframework.stereotype.Component
 
@@ -22,7 +21,7 @@ class KakaoOidcStrategy(
             ?: throw IllegalStateException("Client properties for $PROVIDER_NAME not found.")
 
     override fun getToken(authorizationCode: String): String {
-        val getTokenRequest = GetTokenRequest(
+        val getTokenRequest = KakaoOidcApiDto.GetTokenRequest(
             clientId = client.clientId,
             clientSecret = client.clientSecret,
             redirectUri = client.redirectUri,
@@ -32,7 +31,7 @@ class KakaoOidcStrategy(
     }
 
     override fun getTokenInfo(idToken: String): OidcStrategy.IdTokenInfo {
-        val response: GetTokenInfoResponse = kakaoOidcApi.getTokenInfo(idToken)
+        val response: KakaoOidcApiDto.GetTokenInfoResponse = kakaoOidcApi.getTokenInfo(idToken)
 
         return OidcStrategy.IdTokenInfo(
             sub = response.sub,

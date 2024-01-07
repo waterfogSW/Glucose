@@ -1,8 +1,6 @@
 package com.waterfogsw.glucose.user.infrastructure.client.api
 
-import com.waterfogsw.glucose.user.infrastructure.client.api.dto.GetTokenInfoResponse
-import com.waterfogsw.glucose.user.infrastructure.client.api.dto.GetTokenRequest
-import com.waterfogsw.glucose.user.infrastructure.client.api.dto.GetTokenResponse
+import com.waterfogsw.glucose.user.infrastructure.client.api.dto.KakaoOidcApiDto
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.PostMapping
@@ -11,15 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping
 interface KakaoOidcApi {
 
     @PostMapping(
-        value = ["\${oidc.providers.kakao.token-endpoint"],
+        value = ["\${oidc.providers.kakao.token-endpoint}"],
         consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE],
     )
-    fun getToken(request: GetTokenRequest): GetTokenResponse
+    fun getToken(request: KakaoOidcApiDto.GetTokenRequest): KakaoOidcApiDto.GetTokenResponse
 
     @PostMapping(
         value = ["\${oidc.providers.kakao.token-info-endpoint}"],
         consumes = [MediaType.APPLICATION_FORM_URLENCODED_VALUE],
     )
-    fun getTokenInfo(idToken: String): GetTokenInfoResponse
+    fun getTokenInfo(idToken: String): KakaoOidcApiDto.GetTokenInfoResponse
 
 }
