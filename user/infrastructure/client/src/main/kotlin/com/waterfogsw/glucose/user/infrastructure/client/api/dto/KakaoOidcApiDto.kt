@@ -1,5 +1,7 @@
 package com.waterfogsw.glucose.user.infrastructure.client.api.dto
 
+import feign.form.FormProperty
+
 /**
  * 카카오 OIDC API DTO
  */
@@ -14,13 +16,19 @@ class KakaoOidcApiDto {
      * @property grantType 토큰 발급 타입 (authorization_code로 고정)
      *
      * @see <a href="https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token">토큰 발급 요청</a>
+     * @see <a href="https://github.com/OpenFeign/feign-form/issues/79">feign-form issue 79 val -> var</a>
      */
     data class GetTokenRequest(
-        val clientId: String,
-        val clientSecret: String,
-        val redirectUri: String,
-        val code: String,
-        val grantType: String = "authorization_code"
+        @FormProperty("client_id")
+        var clientId: String,
+        @FormProperty("client_secret")
+        var clientSecret: String,
+        @FormProperty("redirect_uri")
+        var redirectUri: String,
+        @FormProperty("code")
+        var code: String,
+        @FormProperty("grant_type")
+        var grantType: String = "authorization_code"
     )
 
     /**
@@ -43,6 +51,16 @@ class KakaoOidcApiDto {
         val expiresIn: Int,
         val scope: String,
         val refreshTokenExpiresIn: Int,
+    )
+
+    /**
+     * 토큰 정보 조회 요청을 위한 DTO
+     * @property idToken ID 토큰
+     * @see <a href="https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#oidc-get-id-token-info">토큰 정보 조회</a>
+     */
+    data class GetIdTokenInfoRequest(
+        @FormProperty("id_token")
+        var idToken: String,
     )
 
     /**
