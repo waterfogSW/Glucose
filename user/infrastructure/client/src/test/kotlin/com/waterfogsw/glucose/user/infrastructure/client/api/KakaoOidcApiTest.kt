@@ -36,4 +36,19 @@ class KakaoOidcApiTest(
         }
     }
 
+    describe("getTokenInfo()") {
+        it("카카오 인증서버에 토큰 정보를 요청한다.") {
+            // arrange
+            val request: KakaoOidcApiDto.GetTokenInfoRequest = KakaoOidcApiDto.GetTokenInfoRequest(
+                idToken = "test"
+            )
+
+            // act
+            val tokenInfo: KakaoOidcApiDto.GetTokenInfoResponse = kakaoOidcApi.getTokenInfo(request)
+
+            // assert
+            tokenInfo shouldNotBe null
+        }
+    }
+
 })
