@@ -21,6 +21,12 @@ object KakaoOidcMockServerConfig {
         val url = "/oauth/token"
         stubFor(
             post(urlEqualTo(url))
+                .withHeader("Content-Type", containing(MediaType.APPLICATION_FORM_URLENCODED_VALUE))
+                .withRequestBody(containing("client_id"))
+                .withRequestBody(containing("redirect_uri"))
+                .withRequestBody(containing("code"))
+                .withRequestBody(containing("client_secret"))
+                .withRequestBody(containing("grant_type"))
                 .willReturn(
                     aResponse()
                         .withStatus(HttpStatus.OK.value())
@@ -36,6 +42,8 @@ object KakaoOidcMockServerConfig {
         val url = "/oauth/tokeninfo"
         stubFor(
             post(urlEqualTo(url))
+                .withHeader("Content-Type", containing(MediaType.APPLICATION_FORM_URLENCODED_VALUE))
+                .withRequestBody(containing("id_token"))
                 .willReturn(
                     aResponse()
                         .withStatus(HttpStatus.OK.value())
