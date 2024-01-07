@@ -1,4 +1,4 @@
-package com.waterfogsw.glucose.user.infrastructure.client.api
+package com.waterfogsw.glucose.user.infrastructure.client.api.dto
 
 import com.waterfogsw.glucose.user.infrastructure.client.api.dto.KakaoOidcApiDto
 

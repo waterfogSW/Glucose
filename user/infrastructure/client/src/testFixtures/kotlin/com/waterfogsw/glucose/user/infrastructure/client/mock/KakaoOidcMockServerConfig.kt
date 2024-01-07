@@ -2,8 +2,8 @@ package com.waterfogsw.glucose.user.infrastructure.client.mock
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.tomakehurst.wiremock.client.WireMock.*
-import com.waterfogsw.glucose.user.infrastructure.client.api.KakaoOidcApiDtoFixtures.getTokenInfoResponse
-import com.waterfogsw.glucose.user.infrastructure.client.api.KakaoOidcApiDtoFixtures.getTokenResponse
+import com.waterfogsw.glucose.user.infrastructure.client.api.dto.KakaoOidcApiDtoFixtures.getTokenInfoResponse
+import com.waterfogsw.glucose.user.infrastructure.client.api.dto.KakaoOidcApiDtoFixtures.getTokenResponse
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 

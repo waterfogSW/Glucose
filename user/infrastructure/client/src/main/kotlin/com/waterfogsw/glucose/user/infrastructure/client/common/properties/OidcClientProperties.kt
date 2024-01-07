@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.bind.ConstructorBinding
 
 @ConfigurationProperties(prefix = "oidc")
-data class OidcClientProperties @ConstructorBinding constructor(
+data class OidcClientProperties (
     val clients: Map<String, Client>,
     val providers: Map<String, Provider>,
 ) {
