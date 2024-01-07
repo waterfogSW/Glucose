@@ -9,3 +9,7 @@ oidc:
       base-url: https://localhost:443
       token-endpoint: /oauth/token
       token-info-endpoint: /oauth/tokeninfo
+
+logging:
+  level:
+    com.waterfogsw.glucose: debug
