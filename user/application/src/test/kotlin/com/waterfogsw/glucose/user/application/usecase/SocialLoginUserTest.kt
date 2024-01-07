@@ -3,9 +3,9 @@ package com.waterfogsw.glucose.user.application.usecase
 import com.waterfogsw.glucose.user.application.port.stub.SocialLoginPortStub
 import com.waterfogsw.glucose.user.application.port.stub.UserRepositorySpy
 import com.waterfogsw.glucose.user.application.port.stub.UserSocialLoginInfoRepositorySpy
-import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
-import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import com.waterfogsw.glucose.user.domain.entity.OAuth2UserInfoTestFixture
+import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
+import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 

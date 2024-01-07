@@ -20,10 +20,11 @@ class SocialLoginUser(
             oAuth2Provider = command.oAuth2Provider,
         )
 
-        val userSocialLoginInfo: UserSocialLoginInfo? = socialLoginInfoRepository.findBySubAndProvider(
-            sub = userInfo.sub,
-            oAuth2Provider = command.oAuth2Provider
-        )
+        val userSocialLoginInfo: UserSocialLoginInfo? =
+            socialLoginInfoRepository.findBySubAndProvider(
+                sub = userInfo.sub,
+                oAuth2Provider = command.oAuth2Provider
+            )
 
         if (userSocialLoginInfo == null) {
             val user: User = User.create(

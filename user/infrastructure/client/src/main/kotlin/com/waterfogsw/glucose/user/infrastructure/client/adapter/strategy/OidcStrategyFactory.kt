@@ -13,6 +13,7 @@ class OidcStrategyFactory(
             OAuth2Provider.KAKAO -> {
                 applicationContext.getBean(KakaoOidcStrategy::class.java)
             }
+
             OAuth2Provider.GOOGLE -> TODO()
         }
     }

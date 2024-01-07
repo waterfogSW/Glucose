@@ -1,7 +1,7 @@
 package com.waterfogsw.glucose.user.domain.entity
 
-import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
 import com.waterfogsw.glucose.common.ulid.UlidUtil
+import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
 import java.time.LocalDateTime
 import java.util.*
 

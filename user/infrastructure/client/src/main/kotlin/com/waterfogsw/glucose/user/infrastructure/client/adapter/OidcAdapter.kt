@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 @Component
 class OidcAdapter(
     private val oidcStrategyFactory: OidcStrategyFactory
-): OidcPort {
+) : OidcPort {
 
     override fun getUserInfo(
         authorizationCode: String,

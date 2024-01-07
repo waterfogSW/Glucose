@@ -1,7 +1,7 @@
 package com.waterfogsw.glucose.user.application.port
 
-import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
+import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
 
 interface UserSocialLoginInfoRepository {
 
