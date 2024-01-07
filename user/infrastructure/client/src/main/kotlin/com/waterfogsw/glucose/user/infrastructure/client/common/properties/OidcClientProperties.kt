@@ -1,10 +1,9 @@
 package com.waterfogsw.glucose.user.infrastructure.client.common.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
-import org.springframework.boot.context.properties.bind.ConstructorBinding
 
 @ConfigurationProperties(prefix = "oidc")
-data class OidcClientProperties (
+data class OidcClientProperties(
     val clients: Map<String, Client>,
     val providers: Map<String, Provider>,
 ) {
