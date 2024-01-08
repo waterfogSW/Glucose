@@ -20,4 +20,7 @@ object Version {
 
     const val SPRING_COULD = "2023.0.0"
     const val SPRING_COULD_CONTRACT = "4.0.1"
+
+    const val MYSQL = "8.0.33"
+    const val H2 = "2.2.224"
 }
