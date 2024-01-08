@@ -8,13 +8,13 @@ import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import org.springframework.stereotype.Service
 
 @Service
-class SocialLoginUser(
+class UserSocialLogin(
     private val userRepository: UserRepository,
     private val oidcPort: OidcPort,
     private val socialLoginInfoRepository: UserSocialLoginInfoRepository
-) : SocialLoginUserUseCase {
+) : UserSocialLoginUseCase {
 
-    override fun invoke(command: SocialLoginUserUseCase.Command): SocialLoginUserUseCase.Result {
+    override fun invoke(command: UserSocialLoginUseCase.Command): UserSocialLoginUseCase.Result {
         val userInfo: OidcPort.UserInfo = oidcPort.getUserInfo(
             authorizationCode = command.authorizationCode,
             oAuth2Provider = command.oAuth2Provider,
@@ -39,10 +39,10 @@ class SocialLoginUser(
                 oAuth2Provider = command.oAuth2Provider
             ).apply { socialLoginInfoRepository.save(this) }
 
-            return SocialLoginUserUseCase.Result.Success(userId = user.id)
+            return UserSocialLoginUseCase.Result.Success(userId = user.id)
         }
 
-        return SocialLoginUserUseCase.Result.Success(userId = userSocialLoginInfo.userId)
+        return UserSocialLoginUseCase.Result.Success(userId = userSocialLoginInfo.userId)
     }
 
 }

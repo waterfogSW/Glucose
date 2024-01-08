@@ -4,7 +4,7 @@ import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
 import java.util.*
 
 
-fun interface SocialLoginUserUseCase {
+fun interface UserSocialLoginUseCase {
 
     fun invoke(command: Command): Result
 
