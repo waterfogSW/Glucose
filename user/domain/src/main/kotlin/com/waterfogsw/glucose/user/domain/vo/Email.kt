@@ -1,7 +1,7 @@
 package com.waterfogsw.glucose.user.domain.vo
 
 @JvmInline
-value class Email(private val value: String) {
+value class Email(val value: String) {
     init {
         require(isValidEmail(value)) { "유효한 이메일 형식이 아닙니다." }
     }
