@@ -7,7 +7,7 @@ import com.waterfogsw.glucose.user.infrastructure.persistence.repository.UserJpa
 import org.springframework.stereotype.Component
 
 @Component
-class UserRepositoryAdapter(
+class UserPersistenceAdapter(
     private val userJpaRepository: UserJpaRepository
 ) : UserRepository {
 
