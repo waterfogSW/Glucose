@@ -16,6 +16,8 @@
 ![Kotest](https://img.shields.io/badge/Kotest-5.6.0-7F52FF?style=flat)
 ![Spring Cloud Contract](https://img.shields.io/badge/Spring_Cloud_Contract-4.0.1-6DB33F?style=flat&logo=spring)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0.33-4479A1?style=flat&logo=mysql)
+![Java JWT](https://img.shields.io/badge/Java_JWT-4.4.0-000000?style=flat&logo=json-web-tokens)
+![JWKS RSA](https://img.shields.io/badge/JWKS_RSA-0.22.1-000000?style=flat&logo=json-web-tokens)
 
 ## 목차
 
@@ -75,7 +77,7 @@ AI는 사진의 내용을 분석하여 현재 개설된 채팅방중 적합한 �
 
 ### 시스템 아키텍처
 
-![img.png](docs/image/Service%20Architecture.png)
+![img.png](docs/image/system_architecture.png)
 
 ## 🚀 구현
 
@@ -93,10 +95,12 @@ AI는 사진의 내용을 분석하여 현재 개설된 채팅방중 적합한 �
 
 **구현**
 
-- OIDC를 사용해 OAuth 2.0의 인증 및 인가 과정을 단순화.
-- Open Feign을 사용해 
+- Java JWT 라이브러리를 래핑하여 프로젝트에 적용
+- Open Feign을 사용해 ID Token을 발급
+- 발급된 ID Token을 통해 사용자 정보를 확인
+  - JSON key set의 요청은 Guava Cache를 사용해 캐싱하여 요청 횟수를 줄임
 
-![img.png](docs/image/oidc-flow.png)
+![oidc flow](docs/image/oidc_flow.png)
 
 ### 2. 이미지 분석을 통한 채팅방 추천
 
