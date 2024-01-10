@@ -75,7 +75,7 @@ object JwtTokenProvider {
         domain: String,
     ): Result<JwtClaims> {
         val provider = JwkProviderBuilder(domain)
-            .cached(10, 24, TimeUnit.HOURS)
+            .cached(10, 60 * 24, TimeUnit.HOURS)
             .rateLimited(10, 1, TimeUnit.MINUTES)
             .build()
         val jwt = JWT.decode(token)
