@@ -75,8 +75,8 @@ class JwtTokenProviderTest : DescribeSpec({
     }
 
 
-    describe("validateToken(token: String, secret?: String)") {
-        context("서명되지 않은 토큰과 secret이 null이면") {
+    describe("verifyToken()") {
+        context("서명되지 않은 토큰과 secret이 null이 주어지면") {
             it("토큰의 유효성을 검증한다.") {
                 // arrange
                 val token: String = JwtTokenProvider.createToken(
@@ -93,7 +93,7 @@ class JwtTokenProviderTest : DescribeSpec({
 
                 // act
                 val result = runCatching {
-                    JwtTokenProvider.validateToken(token)
+                    JwtTokenProvider.verifyToken(token)
                 }.exceptionOrNull()
 
                 // assert
@@ -119,7 +119,7 @@ class JwtTokenProviderTest : DescribeSpec({
 
                 // act
                 val result = runCatching {
-                    JwtTokenProvider.validateToken(token)
+                    JwtTokenProvider.verifyToken(token)
                 }.exceptionOrNull()
 
                 // assert
@@ -146,7 +146,7 @@ class JwtTokenProviderTest : DescribeSpec({
 
                 // act
                 val result = runCatching {
-                    JwtTokenProvider.validateToken(token, secret)
+                    JwtTokenProvider.verifyToken(token, secret)
                 }.exceptionOrNull()
 
                 // assert
@@ -174,7 +174,7 @@ class JwtTokenProviderTest : DescribeSpec({
 
                 // act
                 val result = runCatching {
-                    JwtTokenProvider.validateToken(token, anotherKey)
+                    JwtTokenProvider.verifyToken(token, anotherKey)
                 }.exceptionOrNull()
 
                 // assert
@@ -201,7 +201,7 @@ class JwtTokenProviderTest : DescribeSpec({
 
                 // act
                 val result = runCatching {
-                    JwtTokenProvider.validateToken(token, secret)
+                    JwtTokenProvider.verifyToken(token, secret)
                 }.exceptionOrNull()
 
                 // assert
@@ -229,91 +229,7 @@ class JwtTokenProviderTest : DescribeSpec({
 
                 // act
                 val result = runCatching {
-                    JwtTokenProvider.validateToken(token, anotherKey)
-                }.exceptionOrNull()
-
-                // assert
-                result.shouldBeInstanceOf<JwtVerificationException>()
-            }
-        }
-    }
-
-    describe("getClaims()") {
-        context("토큰의 기간이 만료되지 않았으면") {
-            it("토큰의 claims를 반환한다.") {
-                // arrange
-                val token: String = JwtTokenProvider.createToken(
-                    jwtClaims = JwtClaims {
-                        registeredClaims {
-                            sub = "sub"
-                            aud = listOf("aud1", "aud2")
-                        }
-                        customClaims {
-                            this["key"] = "value"
-                        }
-                    },
-                    secret = secret,
-                )
-
-                // act
-                val claims = JwtTokenProvider.getClaims(token, secret).getOrNull()!!
-
-                // assert
-                claims.sub shouldBe "sub"
-                claims.aud shouldBe listOf("aud1", "aud2")
-
-                claims.customClaims["key"] shouldBe "value"
-            }
-        }
-
-        context("토큰의 기간이 만료되었으면") {
-            it("ExpiredJwtException을 발생시킨다.") {
-                // arrange
-                val token: String = JwtTokenProvider.createToken(
-                    jwtClaims = JwtClaims {
-                        registeredClaims {
-                            sub = "sub"
-                            aud = listOf("aud1", "aud2")
-                            exp = Date.from(Date().toInstant().minusSeconds(1))
-                        }
-                        customClaims {
-                            this["key"] = "value"
-                        }
-                    },
-                    secret = secret,
-                )
-
-                // act
-                val result = runCatching {
-                    JwtTokenProvider.getClaims(token, secret)
-                }.exceptionOrNull()
-
-                // assert
-                result.shouldBeInstanceOf<JwtExpiredException>()
-            }
-        }
-
-        context("토큰의 서명이 다른경우") {
-            it("SignatureException을 발생시킨다.") {
-                // arrange
-                val token: String = JwtTokenProvider.createToken(
-                    jwtClaims = JwtClaims {
-                        registeredClaims {
-                            sub = "sub"
-                            aud = listOf("aud1", "aud2")
-                        }
-                        customClaims {
-                            this["key"] = "value"
-                        }
-                    },
-                    secret = secret,
-                )
-
-                val anotherKey = "testtestetesttestetesttestetesttestetesttestetesttestetestteste"
-
-                // act
-                val result = runCatching {
-                    JwtTokenProvider.getClaims(token, anotherKey)
+                    JwtTokenProvider.verifyToken(token, anotherKey)
                 }.exceptionOrNull()
 
                 // assert

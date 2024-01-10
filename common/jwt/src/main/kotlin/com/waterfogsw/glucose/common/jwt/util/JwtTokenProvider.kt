@@ -1,11 +1,15 @@
 package com.waterfogsw.glucose.common.jwt.util
 
+import com.auth0.jwk.Jwk
+import com.auth0.jwk.JwkProviderBuilder
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.exceptions.TokenExpiredException
 import com.waterfogsw.glucose.common.jwt.error.JwtExpiredException
 import com.waterfogsw.glucose.common.jwt.error.JwtVerificationException
 import com.waterfogsw.glucose.common.jwt.vo.JwtClaims
+import java.security.interfaces.RSAPublicKey
+import java.util.concurrent.TimeUnit
 
 /**
  * JwtTokenProvider class provides utility methods to handle JSON Web Tokens (JWTs).
@@ -50,36 +54,49 @@ object JwtTokenProvider {
             }
     }
 
-    /**
-     * Validates a token using the provided secret key.
-     *
-     * @param token The token to validate.
-     * @param secret The secret key used to verify the token's signature. If null, the token is considered unsecured.
-     * @return A Throwable object if there is an exception during validation, otherwise null.
-     */
-    fun validateToken(
-        token: String,
-        secret: String? = null,
-    ): Throwable? {
-        val algorithm: Algorithm = getAlgorithm(secret)
-        return runCatching { JWT.require(algorithm).build().verify(token) }
-            .onFailure { exception -> handleException(exception) }
-            .exceptionOrNull()
-    }
-
-
-    /**
-     * Retrieves the claims of a JSON Web Token (JWT) using the provided token and secret key.
-     *
-     * @param token The token to retrieve the claims from.
-     * @param secret The secret key used to verify the token's signature. If null, the token is considered unsecured.
-     * @return The result containing the JWT claims if successful, or an exception if there is a validation error.
-     */
-    fun getClaims(
+    fun verifyToken(
         token: String,
         secret: String? = null,
     ): Result<JwtClaims> {
-        val algorithm = getAlgorithm(secret)
+        val algorithm: Algorithm = getAlgorithm(secret)
+        return verifyToken(token, algorithm)
+    }
+
+    /**
+     * Verifies the given token with the JWKS (JSON Web Key Set) retrieved from the specified domain.
+     *
+     * @param token The token to be verified.
+     * @param domain The domain from which to retrieve the JWKS.
+     * @return A Result object that encapsulates the result of the verification. On success, it contains JwtClaims,
+     * which represents the claims of the JSON Web Token. On failure, it contains the corresponding exception.
+     */
+    fun verifyTokenWithJwks(
+        token: String,
+        domain: String,
+    ): Result<JwtClaims> {
+        val provider = JwkProviderBuilder(domain)
+            .cached(10, 24, TimeUnit.HOURS)
+            .rateLimited(10, 1, TimeUnit.MINUTES)
+            .build()
+        val jwt = JWT.decode(token)
+        val jwk: Jwk = provider[jwt.keyId]
+        val algorithm = Algorithm.RSA256(jwk.publicKey as RSAPublicKey, null)
+        return verifyToken(token, algorithm)
+    }
+
+    /**
+     * Verifies the given token with the provided algorithm.
+     *
+     * @param token The token to be verified.
+     * @param algorithm The algorithm used to verify the token.
+     * @return A Result object that encapsulates the result of the verification. On success, it contains JwtClaims,
+     * which represents the claims of the JSON Web Token. On failure, it contains the corresponding exception.
+     */
+
+    private fun verifyToken(
+        token: String,
+        algorithm: Algorithm,
+    ): Result<JwtClaims> {
         return runCatching { JWT.require(algorithm).build().verify(token) }
             .mapCatching { claims -> JwtClaims.from(claims) }
             .onFailure { exception -> handleException(exception) }
