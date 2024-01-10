@@ -23,4 +23,6 @@ object Version {
 
     const val MYSQL = "8.0.33"
     const val H2 = "2.2.224"
+
+    const val JACKSON = "2.16.1"
 }

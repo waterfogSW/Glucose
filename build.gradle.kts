@@ -33,6 +33,10 @@ subprojects {
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-stdlib:${Version.KOTLIN}")
         implementation("org.jetbrains.kotlin:kotlin-reflect:${Version.KOTLIN}")
+
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Version.JACKSON}")
+        implementation("com.fasterxml.jackson.core:jackson-databind:${Version.JACKSON}")
+
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:${Version.SPRING_BOOT}")
         testImplementation("io.mockk:mockk:${Version.MOCKK}")
         testImplementation("com.ninja-squad:springmockk:${Version.SPRING_MOCKK}")
