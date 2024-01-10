@@ -19,7 +19,7 @@ class JwtClaimsBuilder {
 
     fun registeredClaims(init: RegisteredClaimsBuilder.() -> Unit) {
         val builder = RegisteredClaimsBuilder().apply(init)
-        registeredClaims = builder.build()  // 여기서 RegisteredClaims 객체를 생성합니다.
+        registeredClaims = builder.build()
     }
 
     fun customClaims(block: MutableMap<String, Any>.() -> Unit) {
