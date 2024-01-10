@@ -8,16 +8,24 @@ import com.waterfogsw.glucose.common.jwt.error.JwtVerificationException
 import com.waterfogsw.glucose.common.jwt.vo.JwtClaims
 
 /**
- * Provides utility functions for creating and validating JWT tokens.
+ * JwtTokenProvider class provides utility methods to handle JSON Web Tokens (JWTs).
+ *
+ * The class provides methods to create, validate, and retrieve claims from a JWT.
+ * It can generate a JWT token with the specified subject, claims, secret, and expiration time.
+ * The secret can be nullable, and if null, the token is considered unsecured.
+ * The class also provides a method to validate a JWT token using a provided secret key.
+ * If no secret key is provided, the token is considered unsecured.
+ * It also has a method to retrieve the claims from a JWT token using the specified token and secret.
+ * The secret can be nullable, and if null, the token is considered unsecured.
  */
 object JwtTokenProvider {
 
     /**
-     * Creates a JWT token with the specified subject, claims, secret, and expiration time.
-     * The secret parameter is now nullable.
+     * Creates a JSON Web Token (JWT) using the provided JWT claims and secret key.
      *
-     * @param secret The secret key to sign the token. If null, the token is considered unsecured.
-     * @return The generated JWT token.
+     * @param jwtClaims The claims for the JWT.
+     * @param secret The secret key used to sign the JWT. If null, the JWT is considered unsecured.
+     * @return Generated JWT as a string.
      */
     fun createToken(
         jwtClaims: JwtClaims,
@@ -43,10 +51,11 @@ object JwtTokenProvider {
     }
 
     /**
-     * Validates a JSON Web Token (JWT) using a provided secret key. If no secret key is provided, the token is considered unsecured.
+     * Validates a token using the provided secret key.
      *
-     * @param token The JWT token to validate.
-     * @param secret The secret key used to sign the token. If null, the token is considered unsecured.
+     * @param token The token to validate.
+     * @param secret The secret key used to verify the token's signature. If null, the token is considered unsecured.
+     * @return A Throwable object if there is an exception during validation, otherwise null.
      */
     fun validateToken(
         token: String,
@@ -60,12 +69,11 @@ object JwtTokenProvider {
 
 
     /**
-     * Retrieves the claims from a JWT token using the specified token and secret.
-     * The secret parameter is now nullable.
+     * Retrieves the claims of a JSON Web Token (JWT) using the provided token and secret key.
      *
-     * @param token The JWT token from which to retrieve the claims.
-     * @param secret The secret key used to sign the token. If null, the token is considered unsecured.
-     * @return A map of the claims from the JWT token.
+     * @param token The token to retrieve the claims from.
+     * @param secret The secret key used to verify the token's signature. If null, the token is considered unsecured.
+     * @return The result containing the JWT claims if successful, or an exception if there is a validation error.
      */
     fun getClaims(
         token: String,
@@ -77,11 +85,12 @@ object JwtTokenProvider {
             .onFailure { exception -> handleException(exception) }
     }
 
-    private val exceptionHandlerList = listOf<Pair<Class<out Throwable>, (Throwable) -> Nothing>>(
-        TokenExpiredException::class.java to { throw JwtExpiredException("토큰이 만료되었습니다.") },
-        Throwable::class.java to { e -> throw JwtVerificationException("토큰 유효성 검사에 실패했습니다. message=${e.message}") }
-    )
-
+    /**
+     * Retrieve the algorithm to be used for JWT verification based on the provided secret key.
+     *
+     * @param secret The secret key used to verify the token's signature. If null, the token is considered unsecured.
+     * @return The algorithm to be used for JWT verification.
+     */
     private fun getAlgorithm(secret: String?): Algorithm {
         return if (secret == null) {
             Algorithm.none()
@@ -91,10 +100,19 @@ object JwtTokenProvider {
     }
 
     /**
-     * Handle exceptions during token validation
+     * Handles an exception by invoking the appropriate exception handler based on the type of exception.
+     *
+     * @param ex The Throwable object representing the exception.
+     * @return This method does not return a value. It throws an exception of type Nothing.
+     * @throws NoSuchElementException if there is no matching exception handler for the given exception.
      */
     private fun handleException(ex: Throwable): Nothing {
         exceptionHandlerList.first { it.first.isAssignableFrom(ex::class.java) }.second.invoke(ex)
     }
+
+    private val exceptionHandlerList = listOf<Pair<Class<out Throwable>, (Throwable) -> Nothing>>(
+        TokenExpiredException::class.java to { throw JwtExpiredException("토큰이 만료되었습니다.") },
+        Throwable::class.java to { e -> throw JwtVerificationException("토큰 유효성 검사에 실패했습니다. message=${e.message}") }
+    )
 
 }
