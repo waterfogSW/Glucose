@@ -16,8 +16,6 @@ object Version {
     const val ULID_CREATOR = "5.2.2"
     const val OPENFEIGN = "4.1.0"
 
-    const val JJWT = "0.12.3"
-
     const val SPRING_COULD = "2023.0.0"
     const val SPRING_COULD_CONTRACT = "4.0.1"
 
@@ -25,4 +23,7 @@ object Version {
     const val H2 = "2.2.224"
 
     const val JACKSON = "2.16.1"
+
+    const val AUTH0_JAVA_JWT = "4.4.0"
+    const val AUTH0_JWKS_RSA = "0.22.1"
 }

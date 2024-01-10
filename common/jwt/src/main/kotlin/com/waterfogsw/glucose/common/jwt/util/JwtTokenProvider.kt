@@ -1,13 +1,11 @@
 package com.waterfogsw.glucose.common.jwt.util
 
+import com.auth0.jwt.JWT
+import com.auth0.jwt.algorithms.Algorithm
+import com.auth0.jwt.exceptions.TokenExpiredException
+import com.waterfogsw.glucose.common.jwt.error.JwtExpiredException
+import com.waterfogsw.glucose.common.jwt.error.JwtVerificationException
 import com.waterfogsw.glucose.common.jwt.vo.JwtClaims
-import io.jsonwebtoken.ExpiredJwtException
-import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.MalformedJwtException
-import io.jsonwebtoken.security.Keys
-import io.jsonwebtoken.security.SecurityException
-import io.jsonwebtoken.security.SignatureException
-import javax.crypto.SecretKey
 
 /**
  * Provides utility functions for creating and validating JWT tokens.
@@ -25,21 +23,23 @@ object JwtTokenProvider {
         jwtClaims: JwtClaims,
         secret: String? = null,
     ): String {
-        val key: SecretKey? = secret?.let { Keys.hmacShaKeyFor(it.toByteArray()) }
-
-        return Jwts
-            .builder()
-            .subject(jwtClaims.sub)
-            .expiration(jwtClaims.exp)
-            .issuedAt(jwtClaims.iat)
-            .notBefore(jwtClaims.nbf)
-            .issuer(jwtClaims.iss)
-            .audience()
-            .apply { jwtClaims.aud?.forEach { add(it) } }
-            .and()
-            .claims(jwtClaims.customClaims)
-            .apply { key?.let { signWith(it) } }
-            .compact()
+        return JWT
+            .create()
+            .withJWTId(jwtClaims.jti)
+            .withSubject(jwtClaims.sub)
+            .withIssuer(jwtClaims.iss)
+            .withAudience(*jwtClaims.aud?.toTypedArray() ?: arrayOf())
+            .withIssuedAt(jwtClaims.iat)
+            .withNotBefore(jwtClaims.nbf)
+            .withExpiresAt(jwtClaims.exp)
+            .withPayload(jwtClaims.customClaims)
+            .let {
+                if (secret == null) {
+                    it.sign(Algorithm.none())
+                } else {
+                    it.sign(Algorithm.HMAC256(secret))
+                }
+            }
     }
 
     /**
@@ -51,16 +51,11 @@ object JwtTokenProvider {
     fun validateToken(
         token: String,
         secret: String? = null,
-    ) {
-        val key: SecretKey? = secret?.let { Keys.hmacShaKeyFor(it.toByteArray()) }
-
-        runCatching {
-            Jwts.parser()
-                .apply { if (key == null) unsecured() else verifyWith(key) }
-                .build()
-                .parse(token)
-        }.onFailure { exception -> handleException(exception) }
-
+    ): Throwable? {
+        val algorithm: Algorithm = getAlgorithm(secret)
+        return runCatching { JWT.require(algorithm).build().verify(token) }
+            .onFailure { exception -> handleException(exception) }
+            .exceptionOrNull()
     }
 
 
@@ -75,49 +70,31 @@ object JwtTokenProvider {
     fun getClaims(
         token: String,
         secret: String? = null,
-    ): JwtClaims {
-        val key: SecretKey? = secret?.let { Keys.hmacShaKeyFor(it.toByteArray()) }
-        return runCatching {
-            Jwts
-                .parser()
-                .apply { if (key == null) unsecured() else verifyWith(key) }
-                .build()
-                .parseSignedClaims(token)
-        }
+    ): Result<JwtClaims> {
+        val algorithm = getAlgorithm(secret)
+        return runCatching { JWT.require(algorithm).build().verify(token) }
             .mapCatching { claims -> JwtClaims.from(claims) }
             .onFailure { exception -> handleException(exception) }
-            .getOrThrow()
     }
 
-    private val exceptionHandlerMap = mapOf<Class<out Throwable>, (Throwable) -> Nothing>(
-        ExpiredJwtException::class.java to { e ->
-            throw com.waterfogsw.glucose.common.jwt.error.ExpiredJwtException(
-                e.message
-            )
-        },
-        MalformedJwtException::class.java to { e ->
-            throw com.waterfogsw.glucose.common.jwt.error.MalformedJwtException(
-                e.message
-            )
-        },
-        SignatureException::class.java to { e ->
-            throw com.waterfogsw.glucose.common.jwt.error.SignatureException(
-                e.message
-            )
-        },
-        SecurityException::class.java to { e ->
-            throw com.waterfogsw.glucose.common.jwt.error.SecurityException(
-                e.message
-            )
-        },
-        Throwable::class.java to { throw RuntimeException("토큰 검증 과정에서 알 수 없는 오류가 발생했습니다.") }
+    private val exceptionHandlerList = listOf<Pair<Class<out Throwable>, (Throwable) -> Nothing>>(
+        TokenExpiredException::class.java to { throw JwtExpiredException("토큰이 만료되었습니다.") },
+        Throwable::class.java to { e -> throw JwtVerificationException("토큰 유효성 검사에 실패했습니다. message=${e.message}") }
     )
+
+    private fun getAlgorithm(secret: String?): Algorithm {
+        return if (secret == null) {
+            Algorithm.none()
+        } else {
+            Algorithm.HMAC256(secret)
+        }
+    }
 
     /**
      * Handle exceptions during token validation
      */
-    private fun handleException(e: Throwable) {
-        exceptionHandlerMap[e::class.java]?.invoke(e)
+    private fun handleException(ex: Throwable): Nothing {
+        exceptionHandlerList.first { it.first.isAssignableFrom(ex::class.java) }.second.invoke(ex)
     }
 
 }

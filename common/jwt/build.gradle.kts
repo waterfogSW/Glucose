@@ -1,5 +1,4 @@
 dependencies {
-    implementation("io.jsonwebtoken:jjwt:${Version.JJWT}")
-    implementation("io.jsonwebtoken:jjwt-api:${Version.JJWT}")
-    implementation("io.jsonwebtoken:jjwt-impl:${Version.JJWT}")
+    implementation("com.auth0:java-jwt:${Version.AUTH0_JAVA_JWT}")
+    implementation("com.auth0:jwks-rsa:${Version.AUTH0_JWKS_RSA}")
 }

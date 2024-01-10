@@ -1,7 +1,6 @@
 package com.waterfogsw.glucose.common.jwt.vo
 
-import io.jsonwebtoken.Claims
-import io.jsonwebtoken.Jws
+import com.auth0.jwt.interfaces.DecodedJWT
 import java.time.Instant
 import java.util.*
 
@@ -11,7 +10,7 @@ import java.util.*
  * @property registeredClaims The registered claims of the JWT.
  * @property customClaims The custom claims of the JWT.
  */
-data class JwtClaims (
+data class JwtClaims(
     val registeredClaims: RegisteredClaims,
     val customClaims: MutableMap<String, Any> = mutableMapOf()
 ) {
@@ -34,7 +33,7 @@ data class JwtClaims (
         val iat: Date? = Date.from(Instant.now()),
         val nbf: Date? = Date.from(Instant.now()),
         val iss: String? = null,
-        val aud: Set<String>? = null,
+        val aud: List<String>? = null,
         val jti: String? = null,
     )
 
@@ -48,7 +47,7 @@ data class JwtClaims (
         get() = registeredClaims.nbf
     val iss: String?
         get() = registeredClaims.iss
-    val aud: Set<String>?
+    val aud: List<String>?
         get() = registeredClaims.aud
     val jti: String?
         get() = registeredClaims.jti
@@ -57,28 +56,22 @@ data class JwtClaims (
 
         const val DEFAULT_EXPIRATION_TIME_SEC: Long = 60 * 60 // 1 hour
 
-        /**
-         * Converts a JSON Web Signature (JWS) containing claims to a JwtClaims object.
-         *
-         * @param claims The Jws object containing the claims.
-         * @return The converted JwtClaims object.
-         */
-        fun from(claims: Jws<Claims>): JwtClaims {
-            val registeredClaims: RegisteredClaims = RegisteredClaims(
-                sub = claims.payload.subject,
-                exp = claims.payload.expiration,
-                iat = claims.payload.issuedAt,
-                nbf = claims.payload.notBefore,
-                iss = claims.payload.issuer,
-                aud = claims.payload.audience,
-                jti = claims.payload.id
+        fun from(claims: DecodedJWT): JwtClaims {
+            val registeredClaims = RegisteredClaims(
+                sub = claims.subject,
+                exp = claims.expiresAt,
+                iat = claims.issuedAt,
+                nbf = claims.notBefore,
+                iss = claims.issuer,
+                aud = claims.audience,
+                jti = claims.id,
             )
             val customClaims: MutableMap<String, Any> = mutableMapOf()
-            claims.payload.forEach { key, value ->
-                if (registeredClaims::class.members.none { it.name == key }) {
-                    customClaims[key] = value
+            claims.claims
+                .filter { it.key !in registeredClaims::class.members.map { member -> member.name } }
+                .forEach { (key, value) ->
+                    customClaims[key] = value.`as`(Any::class.java)
                 }
-            }
             return JwtClaims(registeredClaims, customClaims)
         }
 

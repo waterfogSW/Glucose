@@ -40,7 +40,7 @@ class RegisteredClaimsBuilder {
     var iat: Date? = Date.from(Instant.now())
     var nbf: Date? = Date.from(Instant.now())
     var iss: String? = null
-    var aud: Set<String>? = null
+    var aud: List<String>? = null
     var jti: String? = null
 
     fun build(): JwtClaims.RegisteredClaims =
