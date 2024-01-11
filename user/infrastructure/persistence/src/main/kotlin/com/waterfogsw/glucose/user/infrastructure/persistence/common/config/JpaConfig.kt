@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 
 @Configuration
 @EnableJpaAuditing
-@EntityScan(basePackages = ["com.waterfogsw.glucose.user.infrastructure.persistence.adapter.entity"])
+@EntityScan(basePackages = ["com.waterfogsw.glucose.user.infrastructure.persistence.entity"])
 @EnableJpaRepositories(basePackages = ["com.waterfogsw.glucose.user.infrastructure.persistence.repository"])
 class JpaConfig
