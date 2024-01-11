@@ -2,10 +2,11 @@ package com.waterfogsw.glucose.user.infrastructure.client.adapter
 
 import com.waterfogsw.glucose.user.application.port.OidcPort
 import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
+import com.waterfogsw.glucose.user.domain.vo.Email
+import com.waterfogsw.glucose.user.domain.vo.URL
 import com.waterfogsw.glucose.user.infrastructure.client.adapter.strategy.MockOidcStrategyFactory
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldBeSameInstanceAs
 
 class OidcAdapterTest : DescribeSpec({
 
@@ -19,13 +20,13 @@ class OidcAdapterTest : DescribeSpec({
             val provider = OAuth2Provider.GOOGLE
 
             // act
-            val userInfo: OidcPort.UserInfo = stub.getUserInfo("authorizationCode", OAuth2Provider.GOOGLE)
+            val userInfo: OidcPort.UserInfo = stub.getUserInfo(code, provider)
 
             // assert
             userInfo.sub shouldBe "sub"
             userInfo.name shouldBe "name"
-            userInfo.email shouldBe "email"
-            userInfo.profileImage shouldBe "profileImage"
+            userInfo.email shouldBe Email("test@test.com")
+            userInfo.profileImage shouldBe URL("https://test.com/1.jpg")
         }
     }
 
