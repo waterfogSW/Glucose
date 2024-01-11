@@ -7,3 +7,37 @@ spring:
     include:
       - client
       - application
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+  docker:
+    compose:
+      file: ./user/bootstrap/http/compose.yaml
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  docker:
+    compose:
+      enabled: false
+springdoc:
+  swagger-ui:
+    enabled: false
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  docker:
+    compose:
+      enabled: false
+springdoc:
+  swagger-ui:
+    enabled: false

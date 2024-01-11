@@ -38,6 +38,7 @@ subprojects {
         implementation("com.fasterxml.jackson.core:jackson-databind:${Version.JACKSON}")
 
         annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:${Version.SPRING_BOOT}")
+
         testImplementation("io.mockk:mockk:${Version.MOCKK}")
         testImplementation("com.ninja-squad:springmockk:${Version.SPRING_MOCKK}")
         testImplementation("io.kotest:kotest-runner-junit5:${Version.KOTEST}")

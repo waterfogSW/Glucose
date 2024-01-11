@@ -13,6 +13,8 @@ object Version {
     const val KOTEST = "5.6.0"
     const val KOTEST_EXTENSIONS_SPRING = "1.1.3"
 
+    const val SPRINGDOC_OPENAPI = "2.3.0"
+
     const val ULID_CREATOR = "5.2.2"
     const val OPENFEIGN = "4.1.0"
 
