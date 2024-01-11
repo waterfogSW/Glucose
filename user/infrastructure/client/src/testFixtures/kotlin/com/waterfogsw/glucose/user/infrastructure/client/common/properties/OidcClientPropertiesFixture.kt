@@ -14,7 +14,7 @@ object OidcClientPropertiesFixture {
             ),
             providers = mapOf(
                 "kakao" to OidcClientProperties.Provider(
-                    baseUrl = "baseUrl",
+                    baseUrl = "https://kauth.kakao.com",
                     tokenEndpoint = "tokenEndpoint",
                     tokenInfoEndpoint = "tokenInfoEndpoint",
                 ),

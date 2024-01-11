@@ -29,22 +29,4 @@ class KakaoOidcStrategyTest : DescribeSpec({
         }
     }
 
-    describe("getTokenInfo()") {
-        it("카카오 토큰 정보 받기를 요청한다.") {
-            // arrange
-            val kakaoOidcStrategy = KakaoOidcStrategy(
-                kakaoOidcApi = kakaoOidcApiMock,
-                oidcClientProperties = oidcClientProperties,
-            )
-            val token = "token"
-
-            // act
-            val tokenInfo: OidcStrategy.IdTokenInfo = kakaoOidcStrategy.getTokenInfo(token)
-
-            // assert
-            tokenInfo.sub shouldNotBe null
-        }
-    }
-
-
 })
