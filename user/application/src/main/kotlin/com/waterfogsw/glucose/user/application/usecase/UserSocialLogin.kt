@@ -4,7 +4,7 @@ import com.waterfogsw.glucose.user.application.port.OidcPort
 import com.waterfogsw.glucose.user.application.port.UserRepository
 import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepository
 import com.waterfogsw.glucose.user.domain.entity.User
-import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
+import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
 import org.springframework.stereotype.Service
 
 @Service
@@ -17,32 +17,28 @@ class UserSocialLogin(
     override fun invoke(command: UserSocialLoginUseCase.Command): UserSocialLoginUseCase.Result {
         val userInfo: OidcPort.UserInfo = oidcPort.getUserInfo(
             authorizationCode = command.authorizationCode,
-            oAuth2Provider = command.oAuth2Provider,
+            provider = command.provider,
         )
 
-        val userSocialLoginInfo: UserSocialLoginInfo? =
-            socialLoginInfoRepository.findBySubAndProvider(
-                sub = userInfo.sub,
-                oAuth2Provider = command.oAuth2Provider
-            )
+        val userOAuthInfo: UserOAuthInfo? = socialLoginInfoRepository.findByEmail(email = userInfo.email)
 
-        if (userSocialLoginInfo == null) {
+        if (userOAuthInfo == null) {
             val user: User = User.create(
                 username = userInfo.name,
                 email = userInfo.email,
                 profileImage = userInfo.profileImage
             ).apply { userRepository.save(this) }
 
-            UserSocialLoginInfo.create(
-                sub = userInfo.sub,
+            UserOAuthInfo.create(
+                email = userInfo.email,
                 userId = user.id,
-                oAuth2Provider = command.oAuth2Provider
+                provider = command.provider
             ).apply { socialLoginInfoRepository.save(this) }
 
             return UserSocialLoginUseCase.Result.Success(userId = user.id)
         }
 
-        return UserSocialLoginUseCase.Result.Success(userId = userSocialLoginInfo.userId)
+        return UserSocialLoginUseCase.Result.Success(userId = userOAuthInfo.userId)
     }
 
 }

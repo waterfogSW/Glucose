@@ -1,7 +1,7 @@
 package com.waterfogsw.glucose.user.infrastructure.client.adapter
 
 import com.waterfogsw.glucose.user.application.port.OidcPort
-import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
+import com.waterfogsw.glucose.user.domain.enums.Provider
 import com.waterfogsw.glucose.user.domain.vo.Email
 import com.waterfogsw.glucose.user.domain.vo.URL
 import com.waterfogsw.glucose.user.infrastructure.client.adapter.strategy.MockOidcStrategyFactory
@@ -17,7 +17,7 @@ class OidcAdapterTest : DescribeSpec({
         it("소셜 로그인 제공자별 사용자 정보를 가져온다.") {
             // arrange
             val code = "authorizationCode"
-            val provider = OAuth2Provider.GOOGLE
+            val provider = Provider.GOOGLE
 
             // act
             val userInfo: OidcPort.UserInfo = stub.getUserInfo(code, provider)

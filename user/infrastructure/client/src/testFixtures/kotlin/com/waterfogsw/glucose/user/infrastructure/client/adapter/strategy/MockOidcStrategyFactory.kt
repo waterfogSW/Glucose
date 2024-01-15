@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.infrastructure.client.adapter.strategy
 
-import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
+import com.waterfogsw.glucose.user.domain.enums.Provider
 import com.waterfogsw.glucose.user.domain.vo.Email
 import com.waterfogsw.glucose.user.domain.vo.URL
 
@@ -21,7 +21,7 @@ class MockOidcStrategyFactory : OidcStrategyFactory {
         }
     }
 
-    override fun getStrategy(oAuth2Provider: OAuth2Provider): OidcStrategy {
+    override fun getStrategy(provider: Provider): OidcStrategy {
         return MockStrategy()
     }
 

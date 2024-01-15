@@ -1,7 +1,8 @@
 package com.waterfogsw.glucose.user.infrastructure.persistence.entity
 
-import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
-import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
+import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
+import com.waterfogsw.glucose.user.domain.enums.Provider
+import com.waterfogsw.glucose.user.domain.vo.Email
 import jakarta.persistence.*
 import java.time.LocalDateTime
 import java.util.*
@@ -10,9 +11,9 @@ import java.util.*
 @Table(name = "user_social_login_info")
 class UserSocialLoginInfoJpaEntity(
     id: UUID,
-    sub: String,
+    email: String,
     userId: UUID,
-    oAuth2Provider: OAuth2Provider,
+    provider: Provider,
     createdAt: LocalDateTime,
 ) {
 
@@ -21,8 +22,8 @@ class UserSocialLoginInfoJpaEntity(
     var id: UUID = id
         private set
 
-    @Column(name = "sub", nullable = false)
-    var sub: String = sub
+    @Column(name = "email", nullable = false)
+    var email = email
         private set
 
     @Column(name = "user_id", nullable = false)
@@ -31,7 +32,7 @@ class UserSocialLoginInfoJpaEntity(
 
     @Column(name = "oauth2_provider", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    var oAuth2Provider: OAuth2Provider = oAuth2Provider
+    var provider: Provider = provider
         private set
 
     @Column(name = "created_at", nullable = false)
@@ -40,23 +41,23 @@ class UserSocialLoginInfoJpaEntity(
 
 
     companion object {
-        fun toEntity(userSocialLoginInfo: UserSocialLoginInfo): UserSocialLoginInfoJpaEntity {
+        fun toEntity(userOAuthInfo: UserOAuthInfo): UserSocialLoginInfoJpaEntity {
             return UserSocialLoginInfoJpaEntity(
-                id = userSocialLoginInfo.id,
-                sub = userSocialLoginInfo.sub,
-                userId = userSocialLoginInfo.userId,
-                oAuth2Provider = userSocialLoginInfo.oAuth2Provider,
-                createdAt = userSocialLoginInfo.createdAt,
+                id = userOAuthInfo.id,
+                email = userOAuthInfo.email.value,
+                userId = userOAuthInfo.userId,
+                provider = userOAuthInfo.provider,
+                createdAt = userOAuthInfo.createdAt,
             )
         }
     }
 
-    fun toDomain(): UserSocialLoginInfo {
-        return UserSocialLoginInfo(
+    fun toDomain(): UserOAuthInfo {
+        return UserOAuthInfo(
             id = this.id,
-            sub = this.sub,
+            email = Email(this.email),
             userId = this.userId,
-            oAuth2Provider = this.oAuth2Provider,
+            provider = this.provider,
             createdAt = this.createdAt,
         )
     }

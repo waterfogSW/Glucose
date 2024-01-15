@@ -1,21 +1,22 @@
 package com.waterfogsw.glucose.user.domain.entity
 
-import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
+import com.waterfogsw.glucose.user.domain.enums.Provider
+import com.waterfogsw.glucose.user.domain.vo.Email
 import java.util.*
 
 object OAuth2UserInfoTestFixture {
 
     fun create(
         id: UUID = UUID.randomUUID(),
-        sub: String = "test",
+        email: Email = Email("test@test.com"),
         userId: UUID = UUID.randomUUID(),
-        oAuth2Provider: OAuth2Provider = OAuth2Provider.KAKAO
-    ): UserSocialLoginInfo {
-        return UserSocialLoginInfo(
+        provider: Provider = Provider.KAKAO
+    ): UserOAuthInfo {
+        return UserOAuthInfo(
             id = id,
-            sub = sub,
+            email = email,
             userId = userId,
-            oAuth2Provider = oAuth2Provider
+            provider = provider
         )
     }
 }

@@ -1,13 +1,10 @@
 package com.waterfogsw.glucose.user.application.port
 
-import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
-import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
+import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
+import com.waterfogsw.glucose.user.domain.vo.Email
 
 interface UserSocialLoginInfoRepository {
 
-    fun save(userSocialLoginInfo: UserSocialLoginInfo)
-    fun findBySubAndProvider(
-        sub: String,
-        oAuth2Provider: OAuth2Provider,
-    ): UserSocialLoginInfo?
+    fun save(userOAuthInfo: UserOAuthInfo)
+    fun findByEmail(email: Email): UserOAuthInfo?
 }

@@ -4,8 +4,8 @@ import com.waterfogsw.glucose.user.application.port.stub.SocialLoginPortStub
 import com.waterfogsw.glucose.user.application.port.stub.UserRepositorySpy
 import com.waterfogsw.glucose.user.application.port.stub.UserSocialLoginInfoRepositorySpy
 import com.waterfogsw.glucose.user.domain.entity.OAuth2UserInfoTestFixture
-import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
-import com.waterfogsw.glucose.user.domain.enums.OAuth2Provider
+import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
+import com.waterfogsw.glucose.user.domain.enums.Provider
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
@@ -25,7 +25,7 @@ class UserSocialLoginTest : DescribeSpec({
                 )
 
                 // act
-                val command = UserSocialLoginUseCase.Command("test", OAuth2Provider.KAKAO)
+                val command = UserSocialLoginUseCase.Command("test", Provider.KAKAO)
                 val result: UserSocialLoginUseCase.Result = sut.invoke(command)
 
                 // assert
@@ -37,11 +37,12 @@ class UserSocialLoginTest : DescribeSpec({
 
         context("이전에 소셜 로그인을 통해 가입한 적이 있으면") {
 
-            val userSocialLoginInfoFixture: UserSocialLoginInfo = OAuth2UserInfoTestFixture.create()
+            val userOAuthInfoFixture: UserOAuthInfo = OAuth2UserInfoTestFixture.create()
             val userSocialLoginInfoRepository = UserSocialLoginInfoRepositorySpy()
-            userSocialLoginInfoRepository.save(userSocialLoginInfoFixture)
+            userSocialLoginInfoRepository.save(userOAuthInfoFixture)
 
             it("해당 유저 아이디를 반환한다.") {
+
                 // arrange
                 val socialLoginPort = SocialLoginPortStub()
                 val userRepository = UserRepositorySpy()
@@ -53,12 +54,12 @@ class UserSocialLoginTest : DescribeSpec({
                 )
 
                 // act
-                val command = UserSocialLoginUseCase.Command("test", OAuth2Provider.KAKAO)
+                val command = UserSocialLoginUseCase.Command("test", Provider.KAKAO)
                 val result: UserSocialLoginUseCase.Result = sut.invoke(command)
 
                 // assert
                 check(result is UserSocialLoginUseCase.Result.Success)
-                result.userId shouldBe userSocialLoginInfoFixture.userId
+                result.userId shouldBe userOAuthInfoFixture.userId
             }
         }
     }
