@@ -171,6 +171,43 @@
 
 ![img.png](docs/image/system_architecture.png)
 
+### 코드 아키텍처
+
+![img.png](docs/image/code_architecture.png)
+
+**Domain Hexagon**
+
+- 도메인 모델을 정의하는 모듈이므로, Domain Hexagon으로 명명하였습니다.
+- 애플리케이션의 핵심 로직을 담당하는 모듈로, 도메인을 정의하고 있습니다.
+- POJO로 구현되어 있습니다. 
+- common 모듈내 라이브러리 외 의존성을 가지지 않습니다.
+
+**Application Hexagon**
+
+- 도메인에 대한 유스케이스 및 외부 시스템과의 통신을 위한 Port 인터페이스를 정의합니다.
+- Domain 외 Spring Boot, Common 모듈내 라이브러리 의존성을 가집니다.
+
+**Infrastructure Hexagon**
+
+- 외부 인프라에대한 의존성을 정의하는 모듈이므로, Infrastructure Hexagon으로 명명하였습니다.
+- 외부 인프라와의 통신을 위한 Secondary Adapter를 정의합니다.
+- Secondary Adapter 및 Domain, Application, Spring Boot, Common 모듈내 라이브러리 의존성을 가집니다.
+- 외부 인프라별로 Module을 분리해 관리합니다
+  - infrastructure/kafka
+  - infrastructure/persistence
+  - infrastructure/redis
+- 각 모듈별로 config class를 정의하며, application-{module name}.yaml 파일을 통해 각 모듈별로 설정을 관리합니다.
+  - application-kafka.yaml
+  - application-persistence.yaml
+  - application-redis.yaml
+
+**Bootstrap Hexagon**
+
+- 여러 의존성을 조합해 하나의 애플리케이션 서버를 구성하는 모듈이므로 Bootstrap Hexagon으로 명명하였습니다.
+- 외부 요청을 받아 Use Case를 실행하기 위한 Primary Adapter를 정의합니다. (RestController, Kafka Consumer 등)
+- Primary Adapter관련 인프라 및 Domain, Application, Infrastructure 및 Spring Boot, Common 모듈내 라이브러리 의존성을 가집니다.
+- Infrastructure 모듈과 같이 애플리케이션이 제공할 각 서비스별로 Module을 분리해 제공하는 방법도 고려해보았지만, 애플리케이션 서버마다 제공하는 API가 서로 다른경우가 훨씬 많기 때문에 모듈분리의 효용성이 떨어진다고 판단하여 Bootstrap 모듈에 Primary Adapter를 정의하였습니다.
+
 ## 🚀 구현
 
 ### 1. 소셜 로그인 -> OIDC
