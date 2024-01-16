@@ -8,7 +8,7 @@ import java.util.*
 
 data class User(
     val id: UUID = UlidUtil.createUlid(),
-    val username: String,
+    val name: String,
     val email: Email,
     val statusMessage: String? = null,
     val picture: URL? = null,
@@ -22,12 +22,12 @@ data class User(
 
     companion object {
         fun create(
-            username: String,
+            name: String,
             email: Email,
             picture: URL? = null,
         ): User {
             return User(
-                username = username,
+                name = name,
                 email = email,
                 picture = picture,
             )

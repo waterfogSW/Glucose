@@ -55,7 +55,7 @@ class UserJpaEntity(
         fun from(user: User): UserJpaEntity {
             return UserJpaEntity(
                 id = user.id,
-                username = user.username,
+                username = user.name,
                 email = user.email.value,
                 statusMessage = user.statusMessage,
                 profileImage = user.picture?.value,
@@ -68,7 +68,7 @@ class UserJpaEntity(
     fun toDomain(): User {
         return User(
             id = id,
-            username = username,
+            name = username,
             email = Email(email),
             statusMessage = statusMessage,
             picture = profileImage?.let { URL(it) },

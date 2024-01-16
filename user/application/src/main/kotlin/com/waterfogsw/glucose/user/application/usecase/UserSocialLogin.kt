@@ -24,7 +24,7 @@ class UserSocialLogin(
 
         if (userOAuthInfo == null) {
             val user: User = User.create(
-                username = userInfo.name,
+                name = userInfo.name,
                 email = userInfo.email,
                 picture = userInfo.profileImage
             ).apply { userRepository.save(this) }

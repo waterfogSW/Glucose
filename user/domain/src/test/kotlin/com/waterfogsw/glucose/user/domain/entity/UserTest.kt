@@ -9,7 +9,7 @@ class UserTest : DescribeSpec({
     describe("User.create()") {
         it("User를 생성한다.") {
             val user: User = User.create(
-                username = "test",
+                name = "test",
                 email = Email("test@naver.com"),
             )
 
