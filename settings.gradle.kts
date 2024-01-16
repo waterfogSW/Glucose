@@ -3,6 +3,9 @@ rootProject.name = "glucose-backend"
 /**
  * common
  */
+include(":common:support")
+project(":common:support").projectDir = file("common/support")
+
 include(":common:ulid")
 project(":common:ulid").projectDir = file("common/ulid")
 

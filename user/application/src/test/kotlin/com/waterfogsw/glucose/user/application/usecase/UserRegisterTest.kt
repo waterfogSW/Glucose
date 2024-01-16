@@ -1,9 +1,9 @@
 package com.waterfogsw.glucose.user.application.usecase
 
+import com.waterfogsw.glucose.common.support.vo.Email
 import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepositorySpy
 import com.waterfogsw.glucose.user.application.port.UserRepositorySpy
 import com.waterfogsw.glucose.user.domain.enums.Provider
-import com.waterfogsw.glucose.user.domain.vo.Email
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 

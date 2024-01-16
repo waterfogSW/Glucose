@@ -1,8 +1,8 @@
 package com.waterfogsw.glucose.user.domain.entity
 
+import com.waterfogsw.glucose.common.support.vo.Email
 import com.waterfogsw.glucose.common.ulid.UlidUtil
 import com.waterfogsw.glucose.user.domain.enums.Provider
-import com.waterfogsw.glucose.user.domain.vo.Email
 import java.time.LocalDateTime
 import java.util.*
 

@@ -1,8 +1,8 @@
 package com.waterfogsw.glucose.user.infrastructure.persistence.entity
 
+import com.waterfogsw.glucose.common.support.vo.Email
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import com.waterfogsw.glucose.user.domain.enums.Provider
-import com.waterfogsw.glucose.user.domain.vo.Email
 import jakarta.persistence.*
 import java.time.LocalDateTime
 import java.util.*

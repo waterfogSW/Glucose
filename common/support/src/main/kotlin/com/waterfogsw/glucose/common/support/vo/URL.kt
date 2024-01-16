@@ -1,4 +1,4 @@
-package com.waterfogsw.glucose.user.domain.vo
+package com.waterfogsw.glucose.common.support.vo
 
 @JvmInline
 value class URL(val value: String) {

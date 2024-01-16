@@ -1,7 +1,7 @@
 package com.waterfogsw.glucose.user.application.port
 
+import com.waterfogsw.glucose.common.support.vo.Email
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
-import com.waterfogsw.glucose.user.domain.vo.Email
 
 interface UserSocialLoginInfoRepository {
 

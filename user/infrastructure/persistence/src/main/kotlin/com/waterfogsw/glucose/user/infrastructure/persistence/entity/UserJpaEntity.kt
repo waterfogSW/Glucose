@@ -1,8 +1,8 @@
 package com.waterfogsw.glucose.user.infrastructure.persistence.entity
 
+import com.waterfogsw.glucose.common.support.vo.Email
+import com.waterfogsw.glucose.common.support.vo.URL
 import com.waterfogsw.glucose.user.domain.entity.User
-import com.waterfogsw.glucose.user.domain.vo.Email
-import com.waterfogsw.glucose.user.domain.vo.URL
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
