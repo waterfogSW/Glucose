@@ -1,17 +1,15 @@
 package com.waterfogsw.glucose.user.application.usecase
 
 import com.waterfogsw.glucose.user.application.port.OidcPort
-import com.waterfogsw.glucose.user.application.port.UserRepository
 import com.waterfogsw.glucose.user.application.port.UserOAuthInfoRepository
-import com.waterfogsw.glucose.user.domain.entity.User
 import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
 import org.springframework.stereotype.Service
 
 @Service
 class UserSocialLogin(
-    private val userRepository: UserRepository,
     private val oidcPort: OidcPort,
-    private val userOAuthInfoRepository: UserOAuthInfoRepository
+    private val userOAuthInfoRepository: UserOAuthInfoRepository,
+    private val userRegisterUseCase: UserRegisterUseCase,
 ) : UserSocialLoginUseCase {
 
     override fun invoke(command: UserSocialLoginUseCase.Command): UserSocialLoginUseCase.Result {
@@ -20,22 +18,29 @@ class UserSocialLogin(
             provider = command.provider,
         )
 
-        val userOAuthInfo: UserOAuthInfo? = userOAuthInfoRepository.findByEmail(email = userInfo.email)
+        val userOAuthInfo: UserOAuthInfo? =
+            userOAuthInfoRepository.findByEmail(email = userInfo.email)
 
         if (userOAuthInfo == null) {
-            val user: User = User.create(
-                name = userInfo.name,
-                email = userInfo.email,
-                picture = userInfo.profileImage
-            ).apply { userRepository.save(this) }
+            val registerResult: UserRegisterUseCase.Result = userRegisterUseCase.invoke(
+                UserRegisterUseCase.Command(
+                    name = userInfo.name,
+                    email = userInfo.email,
+                    picture = userInfo.picture,
+                    provider = command.provider,
+                )
+            )
 
-            UserOAuthInfo.create(
-                email = userInfo.email,
-                userId = user.id,
-                provider = command.provider
-            ).apply { userOAuthInfoRepository.save(this) }
+            return when (registerResult) {
+                is UserRegisterUseCase.Result.Success -> {
+                    UserSocialLoginUseCase.Result.Success(userId = registerResult.userId)
+                }
 
-            return UserSocialLoginUseCase.Result.Success(userId = user.id)
+                is UserRegisterUseCase.Result.Failure -> {
+                    UserSocialLoginUseCase.Result.Failure(throwable = registerResult.throwable)
+                }
+            }
+
         }
 
         return UserSocialLoginUseCase.Result.Success(userId = userOAuthInfo.userId)
