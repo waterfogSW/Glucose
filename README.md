@@ -71,11 +71,11 @@
 | 수정일        | updated at           | 수정일, 날짜 (UTC)           |
 | 프로필 이미지    | picture              | 사용자 프로필 이미지             |
 | 소셜 로그인 제공자 | provider             | 소셜로그인 제공자(카카오, 구글, …)   |
-| 유저 로그인     | user login           | 사용자 로그인 유스케이스           |
-| 유저 가입      | register user        | 사용자 회원 가입 유스케이스         |
-| 유저 프로필 조회  | get user profile     | ID 값으로 사용자 프로필 조회 유스케이스 |
-| 유저 탈퇴      | deactivate user      | 유저 탈퇴 유스케이스             |
-| 탈퇴된 유저 정보  | deactivate user info | 탈퇴된 유저 정보               |
+| 유저 로그인     | user social login    | 사용자 로그인 유스케이스           |
+| 유저 가입      | user register        | 사용자 회원 가입 유스케이스         |
+| 유저 프로필 조회  | user get profile     | ID 값으로 사용자 프로필 조회 유스케이스 |
+| 유저 탈퇴      | user deactivate      | 유저 탈퇴 유스케이스             |
+| 탈퇴된 유저 정보  | user info deactivate | 탈퇴된 유저 정보               |
 
 </details>
 
@@ -87,21 +87,21 @@
 | 채빙방 제목        | title                       | 채팅방 제목, 문자열         |
 | 채팅방 설명        | description                 | 채팅방 설명, 문자열         |
 | 채팅방 이미지 URL   | picture                     | 채팅방 대표 이미지 URL      |
-| 채팅 보내기        | send chat message           | 새로운 채팅 전송 유스케이스     |
-| 채팅방 입장        | join chat room              | 채팅방 입장 유스케이스        |
-| 채팅방 생성        | create chat room            | 채팅방 생성 유스케이스        |
-| 채팅방 나가기       | leave chat room             | 채팅방 나가기 유스케이스       |
-| 채팅방 삭제        | delete chat room            | 채팅방 삭제 유스케이스        |
+| 채팅 보내기        | chat send message           | 새로운 채팅 전송 유스케이스     |
+| 채팅방 입장        | chat join room              | 채팅방 입장 유스케이스        |
+| 채팅방 생성        | chat create room            | 채팅방 생성 유스케이스        |
+| 채팅방 나가기       | chat leave room             | 채팅방 나가기 유스케이스       |
+| 채팅방 삭제        | chat delete room            | 채팅방 삭제 유스케이스        |
 | 채팅 메세지        | chat message                | 채팅 메세지              |
 | 메시지 내용        | content                     | 채팅 메시지 내용, 문자열      |
 | 보낸 시각         | sent at                     | 메시지 보낸 시각, 날짜 (UTC) |
-| 채팅방 유저 목록 조회  | list chat room users        | 채팅방 유저 목록 조회 유스케이스  |
-| 채팅 메시지 저장     | save chat message           | 채팅 메시지 저장 유스케이스     |
-| 채팅 메시지 전송     | send chat message           | 채팅 메시지 전송 유스케이스     |
+| 채팅 메시지 저장     | chat message save           | 채팅 메시지 저장 유스케이스     |
+| 채팅 메시지 전송     | chat message send           | 채팅 메시지 전송 유스케이스     |
 | 참여중인 채팅방      | joined chat room            | 유저가 참여중인 채팅방        |
 | 채팅방 유저        | chat room users             | 채팅방 유저              |
-| 채팅방 이미지 기반 검색 | search chat room by image   | 채팅방 이미지 기반 검색 유스케이스 |
-| 채팅방 키워드 기반 검색 | search chat room by keyword | 채팅방 키워드 기반 검        |
+| 채팅방 유저 목록 조회  | chat room list users        | 채팅방 유저 목록 조회 유스케이스  |
+| 채팅방 이미지 기반 검색 | chat room search by image   | 채팅방 이미지 기반 검색 유스케이스 |
+| 채팅방 키워드 기반 검색 | chat room search by keyword | 채팅방 키워드 기반 검        |
 
 </details>
 
@@ -116,9 +116,9 @@
 | 알림 내용       | content           | 알림의 내용             |
 | 읽음 상태       | is read           | 알림 읽음 상태           |
 | 발송 일시       | sent at           | 알림 발송 시각, 날짜 (UTC) |
-| 알림 읽음       | read notification | 알림 읽음 유스케이스        |
-| 알림 발송 유스케이스 | send notification | 알림 발송 유스케이스        |
-| 알림 저장 유스케이스 | save notification | 알림 저장 유스케이스        |
+| 알림 읽음       | notification read | 알림 읽음 유스케이스        |
+| 알림 발송 유스케이스 | notification send | 알림 발송 유스케이스        |
+| 알림 저장 유스케이스 | notification save | 알림 저장 유스케이스        |
 
 </details>
 
