@@ -58,7 +58,7 @@ class UserJpaEntity(
                 username = user.username,
                 email = user.email.value,
                 statusMessage = user.statusMessage,
-                profileImage = user.profileImage?.value,
+                profileImage = user.picture?.value,
                 createdAt = user.createdAt,
                 updatedAt = user.updatedAt,
             )
@@ -71,7 +71,7 @@ class UserJpaEntity(
             username = username,
             email = Email(email),
             statusMessage = statusMessage,
-            profileImage = profileImage?.let { URL(it) },
+            picture = profileImage?.let { URL(it) },
             createdAt = createdAt,
             updatedAt = updatedAt,
         )

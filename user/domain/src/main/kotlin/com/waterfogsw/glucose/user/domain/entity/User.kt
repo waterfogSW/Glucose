@@ -11,7 +11,7 @@ data class User(
     val username: String,
     val email: Email,
     val statusMessage: String? = null,
-    val profileImage: URL? = null,
+    val picture: URL? = null,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updatedAt: LocalDateTime = LocalDateTime.now(),
 ) {
@@ -24,12 +24,12 @@ data class User(
         fun create(
             username: String,
             email: Email,
-            profileImage: URL? = null,
+            picture: URL? = null,
         ): User {
             return User(
                 username = username,
                 email = email,
-                profileImage = profileImage,
+                picture = picture,
             )
         }
     }

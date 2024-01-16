@@ -26,7 +26,7 @@ class UserSocialLogin(
             val user: User = User.create(
                 username = userInfo.name,
                 email = userInfo.email,
-                profileImage = userInfo.profileImage
+                picture = userInfo.profileImage
             ).apply { userRepository.save(this) }
 
             UserOAuthInfo.create(
