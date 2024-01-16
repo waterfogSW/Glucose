@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.infrastructure.persistence.entity
 
-import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
+import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import com.waterfogsw.glucose.user.domain.enums.Provider
 import com.waterfogsw.glucose.user.domain.vo.Email
 import jakarta.persistence.*
@@ -41,19 +41,19 @@ class UserSocialLoginInfoJpaEntity(
 
 
     companion object {
-        fun toEntity(userOAuthInfo: UserOAuthInfo): UserSocialLoginInfoJpaEntity {
+        fun toEntity(userSocialLoginInfo: UserSocialLoginInfo): UserSocialLoginInfoJpaEntity {
             return UserSocialLoginInfoJpaEntity(
-                id = userOAuthInfo.id,
-                email = userOAuthInfo.email.value,
-                userId = userOAuthInfo.userId,
-                provider = userOAuthInfo.provider,
-                createdAt = userOAuthInfo.createdAt,
+                id = userSocialLoginInfo.id,
+                email = userSocialLoginInfo.email.value,
+                userId = userSocialLoginInfo.userId,
+                provider = userSocialLoginInfo.provider,
+                createdAt = userSocialLoginInfo.createdAt,
             )
         }
     }
 
-    fun toDomain(): UserOAuthInfo {
-        return UserOAuthInfo(
+    fun toDomain(): UserSocialLoginInfo {
+        return UserSocialLoginInfo(
             id = this.id,
             email = Email(this.email),
             userId = this.userId,

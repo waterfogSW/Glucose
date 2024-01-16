@@ -60,22 +60,24 @@
 <details>
 <summary><b>유저 (User)</b></summary>
 
-| 한글명        | 영문명                  | 용어 설명                   |
-|------------|----------------------|-------------------------|
-| 게스트        | guest                | 로그인 하지 않은 사용자           |
-| 유저         | user                 | 로그인 한 사용자               |
-| 이름         | name                 | 유저 이름                   |
-| 이메일        | email                | 유저 이메일 주소               |
-| 상태메시지      | status message       | 유저 상태 메시지               |
-| 가입일        | created at           | 가입일, 날짜 (UTC)           |
-| 수정일        | updated at           | 수정일, 날짜 (UTC)           |
-| 프로필 이미지    | picture              | 사용자 프로필 이미지             |
-| 소셜 로그인 제공자 | provider             | 소셜로그인 제공자(카카오, 구글, …)   |
-| 유저 로그인     | user social login    | 사용자 로그인 유스케이스           |
-| 유저 가입      | user register        | 사용자 회원 가입 유스케이스         |
-| 유저 프로필 조회  | user get profile     | ID 값으로 사용자 프로필 조회 유스케이스 |
-| 유저 탈퇴      | user deactivate      | 유저 탈퇴 유스케이스             |
-| 탈퇴된 유저 정보  | user info deactivate | 탈퇴된 유저 정보               |
+| 한글명            | 영문명                    | 용어 설명                   |
+|----------------|------------------------|-------------------------|
+| 게스트            | guest                  | 로그인 하지 않은 사용자           |
+| 유저             | user                   | 로그인 한 사용자               |
+| 유저 소셜로그인       | user social            | 유저 소셜로그인 인증 정보          |
+| 유저 소셜로그인 인증 정보 | user social login info | 유저 소셜로그인 인증 정보          |
+| 이름             | name                   | 유저 이름                   |
+| 이메일            | email                  | 유저 이메일 주소               |
+| 상태메시지          | status message         | 유저 상태 메시지               |
+| 가입일            | created at             | 가입일, 날짜 (UTC)           |
+| 수정일            | updated at             | 수정일, 날짜 (UTC)           |
+| 프로필 이미지        | picture                | 사용자 프로필 이미지             |
+| 소셜 로그인 제공자     | provider               | 소셜로그인 제공자(카카오, 구글, …)   |
+| 유저 로그인         | user social login      | 사용자 로그인 유스케이스           |
+| 유저 가입          | user register          | 사용자 회원 가입 유스케이스         |
+| 유저 프로필 조회      | user get profile       | ID 값으로 사용자 프로필 조회 유스케이스 |
+| 유저 탈퇴          | user deactivate        | 유저 탈퇴 유스케이스             |
+| 탈퇴된 유저 정보      | user info deactivate   | 탈퇴된 유저 정보               |
 
 </details>
 

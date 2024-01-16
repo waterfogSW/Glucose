@@ -6,7 +6,7 @@ import com.waterfogsw.glucose.user.domain.vo.Email
 import java.time.LocalDateTime
 import java.util.*
 
-data class UserOAuthInfo(
+data class UserSocialLoginInfo(
     val id: UUID = UlidUtil.createUlid(),
     val userId: UUID,
     val email: Email,
@@ -18,8 +18,8 @@ data class UserOAuthInfo(
             userId: UUID,
             email: Email,
             provider: Provider,
-        ): UserOAuthInfo {
-            return UserOAuthInfo(
+        ): UserSocialLoginInfo {
+            return UserSocialLoginInfo(
                 userId = userId,
                 email = email,
                 provider = provider,

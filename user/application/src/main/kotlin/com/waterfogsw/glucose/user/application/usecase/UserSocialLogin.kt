@@ -1,14 +1,14 @@
 package com.waterfogsw.glucose.user.application.usecase
 
 import com.waterfogsw.glucose.user.application.port.OidcPort
-import com.waterfogsw.glucose.user.application.port.UserOAuthInfoRepository
-import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
+import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepository
+import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import org.springframework.stereotype.Service
 
 @Service
 class UserSocialLogin(
     private val oidcPort: OidcPort,
-    private val userOAuthInfoRepository: UserOAuthInfoRepository,
+    private val userSocialLoginInfoRepository: UserSocialLoginInfoRepository,
     private val userRegisterUseCase: UserRegisterUseCase,
 ) : UserSocialLoginUseCase {
 
@@ -18,10 +18,10 @@ class UserSocialLogin(
             provider = command.provider,
         )
 
-        val userOAuthInfo: UserOAuthInfo? =
-            userOAuthInfoRepository.findByEmail(email = userInfo.email)
+        val userSocialLoginInfo: UserSocialLoginInfo? =
+            userSocialLoginInfoRepository.findByEmail(email = userInfo.email)
 
-        if (userOAuthInfo == null) {
+        if (userSocialLoginInfo == null) {
             val registerResult: UserRegisterUseCase.Result = userRegisterUseCase.invoke(
                 UserRegisterUseCase.Command(
                     name = userInfo.name,
@@ -43,7 +43,7 @@ class UserSocialLogin(
 
         }
 
-        return UserSocialLoginUseCase.Result.Success(userId = userOAuthInfo.userId)
+        return UserSocialLoginUseCase.Result.Success(userId = userSocialLoginInfo.userId)
     }
 
 }

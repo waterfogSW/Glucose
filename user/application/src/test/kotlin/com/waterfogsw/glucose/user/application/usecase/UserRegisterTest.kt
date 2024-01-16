@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.application.usecase
 
-import com.waterfogsw.glucose.user.application.port.UserOAuthInfoRepositorySpy
+import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepositorySpy
 import com.waterfogsw.glucose.user.application.port.UserRepositorySpy
 import com.waterfogsw.glucose.user.domain.enums.Provider
 import com.waterfogsw.glucose.user.domain.vo.Email
@@ -15,10 +15,10 @@ class UserRegisterTest: DescribeSpec({
         it("새로운 유저와 인증정보를 저장하고 유저 아이디를 반환한다.") {
             // arrange
             val userRepository = UserRepositorySpy()
-            val userOAuthInfoRepository = UserOAuthInfoRepositorySpy()
+            val userSocialLoginInfoRepository = UserSocialLoginInfoRepositorySpy()
             val sut = UserRegister(
                 userRepository = userRepository,
-                userOAuthInfoRepository = userOAuthInfoRepository
+                userSocialLoginInfoRepository = userSocialLoginInfoRepository
             )
 
             // act
@@ -33,7 +33,7 @@ class UserRegisterTest: DescribeSpec({
             // assert
             check(result is UserRegisterUseCase.Result.Success)
             userRepository.existsById(result.userId) shouldBe true
-            userOAuthInfoRepository.existsByUserId(result.userId) shouldBe true
+            userSocialLoginInfoRepository.existsByUserId(result.userId) shouldBe true
         }
     }
 })

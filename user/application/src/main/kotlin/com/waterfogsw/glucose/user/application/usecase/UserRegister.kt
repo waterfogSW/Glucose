@@ -1,15 +1,15 @@
 package com.waterfogsw.glucose.user.application.usecase
 
-import com.waterfogsw.glucose.user.application.port.UserOAuthInfoRepository
+import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepository
 import com.waterfogsw.glucose.user.application.port.UserRepository
 import com.waterfogsw.glucose.user.domain.entity.User
-import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
+import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import org.springframework.stereotype.Service
 
 @Service
 class UserRegister(
     private val userRepository: UserRepository,
-    private val userOAuthInfoRepository: UserOAuthInfoRepository,
+    private val userSocialLoginInfoRepository: UserSocialLoginInfoRepository,
 ) : UserRegisterUseCase {
 
     override fun invoke(command: UserRegisterUseCase.Command): UserRegisterUseCase.Result {
@@ -20,12 +20,12 @@ class UserRegister(
         )
         userRepository.save(user)
 
-        val userOAuthInfo = UserOAuthInfo.create(
+        val userSocialLoginInfo = UserSocialLoginInfo.create(
             userId = user.id,
             email = user.email,
             provider = command.provider,
         )
-        userOAuthInfoRepository.save(userOAuthInfo)
+        userSocialLoginInfoRepository.save(userSocialLoginInfo)
 
         return UserRegisterUseCase.Result.Success(userId = user.id)
     }
