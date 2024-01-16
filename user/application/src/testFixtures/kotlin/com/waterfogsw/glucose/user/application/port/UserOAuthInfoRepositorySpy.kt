@@ -1,6 +1,5 @@
-package com.waterfogsw.glucose.user.application.port.stub
+package com.waterfogsw.glucose.user.application.port
 
-import com.waterfogsw.glucose.user.application.port.UserOAuthInfoRepository
 import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
 import com.waterfogsw.glucose.user.domain.vo.Email
 import java.util.*

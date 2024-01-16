@@ -1,8 +1,8 @@
 package com.waterfogsw.glucose.user.application.usecase
 
-import com.waterfogsw.glucose.user.application.port.stub.SocialLoginPortStub
-import com.waterfogsw.glucose.user.application.port.stub.UserRepositorySpy
-import com.waterfogsw.glucose.user.application.port.stub.UserOAuthInfoRepositorySpy
+import com.waterfogsw.glucose.user.application.port.SocialLoginPortStub
+import com.waterfogsw.glucose.user.application.port.UserRepositorySpy
+import com.waterfogsw.glucose.user.application.port.UserOAuthInfoRepositorySpy
 import com.waterfogsw.glucose.user.domain.entity.OAuth2UserInfoTestFixture
 import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
 import com.waterfogsw.glucose.user.domain.enums.Provider

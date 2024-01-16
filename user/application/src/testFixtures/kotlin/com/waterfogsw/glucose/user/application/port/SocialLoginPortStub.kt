@@ -1,6 +1,5 @@
-package com.waterfogsw.glucose.user.application.port.stub
+package com.waterfogsw.glucose.user.application.port
 
-import com.waterfogsw.glucose.user.application.port.OidcPort
 import com.waterfogsw.glucose.user.domain.enums.Provider
 import com.waterfogsw.glucose.user.domain.vo.Email
 
