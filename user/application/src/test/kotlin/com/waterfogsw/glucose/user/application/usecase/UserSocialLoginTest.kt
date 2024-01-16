@@ -2,7 +2,7 @@ package com.waterfogsw.glucose.user.application.usecase
 
 import com.waterfogsw.glucose.user.application.port.stub.SocialLoginPortStub
 import com.waterfogsw.glucose.user.application.port.stub.UserRepositorySpy
-import com.waterfogsw.glucose.user.application.port.stub.UserSocialLoginInfoRepositorySpy
+import com.waterfogsw.glucose.user.application.port.stub.UserOAuthInfoRepositorySpy
 import com.waterfogsw.glucose.user.domain.entity.OAuth2UserInfoTestFixture
 import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
 import com.waterfogsw.glucose.user.domain.enums.Provider
@@ -17,11 +17,11 @@ class UserSocialLoginTest : DescribeSpec({
                 // arrange
                 val socialLoginPort = SocialLoginPortStub()
                 val userRepository = UserRepositorySpy()
-                val userSocialLoginInfoRepository = UserSocialLoginInfoRepositorySpy()
+                val userSocialLoginInfoRepository = UserOAuthInfoRepositorySpy()
                 val sut = UserSocialLogin(
                     oidcPort = socialLoginPort,
                     userRepository = userRepository,
-                    socialLoginInfoRepository = userSocialLoginInfoRepository
+                    userOAuthInfoRepository = userSocialLoginInfoRepository
                 )
 
                 // act
@@ -38,7 +38,7 @@ class UserSocialLoginTest : DescribeSpec({
         context("이전에 소셜 로그인을 통해 가입한 적이 있으면") {
 
             val userOAuthInfoFixture: UserOAuthInfo = OAuth2UserInfoTestFixture.create()
-            val userSocialLoginInfoRepository = UserSocialLoginInfoRepositorySpy()
+            val userSocialLoginInfoRepository = UserOAuthInfoRepositorySpy()
             userSocialLoginInfoRepository.save(userOAuthInfoFixture)
 
             it("해당 유저 아이디를 반환한다.") {
@@ -50,7 +50,7 @@ class UserSocialLoginTest : DescribeSpec({
                 val sut = UserSocialLogin(
                     oidcPort = socialLoginPort,
                     userRepository = userRepository,
-                    socialLoginInfoRepository = userSocialLoginInfoRepository
+                    userOAuthInfoRepository = userSocialLoginInfoRepository
                 )
 
                 // act

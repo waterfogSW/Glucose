@@ -2,7 +2,7 @@ package com.waterfogsw.glucose.user.application.usecase
 
 import com.waterfogsw.glucose.user.application.port.OidcPort
 import com.waterfogsw.glucose.user.application.port.UserRepository
-import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepository
+import com.waterfogsw.glucose.user.application.port.UserOAuthInfoRepository
 import com.waterfogsw.glucose.user.domain.entity.User
 import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
 import org.springframework.stereotype.Service
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 class UserSocialLogin(
     private val userRepository: UserRepository,
     private val oidcPort: OidcPort,
-    private val socialLoginInfoRepository: UserSocialLoginInfoRepository
+    private val userOAuthInfoRepository: UserOAuthInfoRepository
 ) : UserSocialLoginUseCase {
 
     override fun invoke(command: UserSocialLoginUseCase.Command): UserSocialLoginUseCase.Result {
@@ -20,7 +20,7 @@ class UserSocialLogin(
             provider = command.provider,
         )
 
-        val userOAuthInfo: UserOAuthInfo? = socialLoginInfoRepository.findByEmail(email = userInfo.email)
+        val userOAuthInfo: UserOAuthInfo? = userOAuthInfoRepository.findByEmail(email = userInfo.email)
 
         if (userOAuthInfo == null) {
             val user: User = User.create(
@@ -33,7 +33,7 @@ class UserSocialLogin(
                 email = userInfo.email,
                 userId = user.id,
                 provider = command.provider
-            ).apply { socialLoginInfoRepository.save(this) }
+            ).apply { userOAuthInfoRepository.save(this) }
 
             return UserSocialLoginUseCase.Result.Success(userId = user.id)
         }

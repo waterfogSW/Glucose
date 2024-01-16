@@ -1,13 +1,12 @@
 package com.waterfogsw.glucose.user.application.port.stub
 
-import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepository
+import com.waterfogsw.glucose.user.application.port.UserOAuthInfoRepository
 import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
-import com.waterfogsw.glucose.user.domain.enums.Provider
 import com.waterfogsw.glucose.user.domain.vo.Email
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-class UserSocialLoginInfoRepositorySpy : UserSocialLoginInfoRepository {
+class UserOAuthInfoRepositorySpy : UserOAuthInfoRepository {
 
     private val userOAuthInfoMap: MutableMap<UUID, UserOAuthInfo> =
         ConcurrentHashMap<UUID, UserOAuthInfo>()

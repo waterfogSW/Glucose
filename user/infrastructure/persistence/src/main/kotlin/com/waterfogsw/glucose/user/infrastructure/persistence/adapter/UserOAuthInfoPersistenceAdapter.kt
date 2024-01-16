@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.infrastructure.persistence.adapter
 
-import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepository
+import com.waterfogsw.glucose.user.application.port.UserOAuthInfoRepository
 import com.waterfogsw.glucose.user.domain.entity.UserOAuthInfo
 import com.waterfogsw.glucose.user.domain.vo.Email
 import com.waterfogsw.glucose.user.infrastructure.persistence.entity.UserSocialLoginInfoJpaEntity
@@ -8,9 +8,9 @@ import com.waterfogsw.glucose.user.infrastructure.persistence.repository.UserSoc
 import org.springframework.stereotype.Component
 
 @Component
-class UserSocialLoginInfoPersistenceAdapter(
+class UserOAuthInfoPersistenceAdapter(
     private val userSocialLoginInfoJpaRepository: UserSocialLoginInfoJpaRepository
-) : UserSocialLoginInfoRepository {
+) : UserOAuthInfoRepository {
 
     override fun save(userOAuthInfo: UserOAuthInfo) {
         UserSocialLoginInfoJpaEntity.toEntity(userOAuthInfo)
