@@ -17,6 +17,7 @@ data class User(
 ) {
 
     init {
+        require(name.length in 2..20) { "이름은 2자 이상 10자 이하여야 합니다." }
         require((statusMessage?.length ?: 0) <= 100) { "상태 메시지는 100자를 넘을 수 없습니다." }
     }
 
