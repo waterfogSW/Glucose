@@ -1,7 +1,8 @@
-package com.waterfogsw.glucose.user.application.usecase
+package com.waterfogsw.glucose.user.application.service
 
 import com.waterfogsw.glucose.user.application.port.SocialLoginPortStub
 import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepositorySpy
+import com.waterfogsw.glucose.user.application.port.inbound.UserSocialLoginUseCase
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfoTestFixture
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import com.waterfogsw.glucose.user.domain.enums.Provider
@@ -18,7 +19,7 @@ class UserSocialLoginTest : DescribeSpec({
                 // arrange
                 val socialLoginPort = SocialLoginPortStub()
                 val userSocialLoginInfoRepository = UserSocialLoginInfoRepositorySpy()
-                val sut = UserSocialLogin(
+                val sut = UserSocialLoginDomainService(
                     oidcPort = socialLoginPort,
                     userSocialLoginInfoRepository = userSocialLoginInfoRepository,
                     userRegisterUseCase = UserRegisterUseCaseStub(),
@@ -42,7 +43,7 @@ class UserSocialLoginTest : DescribeSpec({
 
             it("해당 유저 아이디를 반환한다.") {
                 // arrange
-                val sut = UserSocialLogin(
+                val sut = UserSocialLoginDomainService(
                     oidcPort = SocialLoginPortStub(),
                     userSocialLoginInfoRepository = userSocialLoginInfoRepository,
                     userRegisterUseCase = UserRegisterUseCaseStub()

@@ -1,5 +1,6 @@
-package com.waterfogsw.glucose.user.application.usecase
+package com.waterfogsw.glucose.user.application.service
 
+import com.waterfogsw.glucose.user.application.port.inbound.UserRegisterUseCase
 import java.util.*
 
 class UserRegisterUseCaseStub : UserRegisterUseCase {

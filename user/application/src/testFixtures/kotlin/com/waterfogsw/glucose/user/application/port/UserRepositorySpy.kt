@@ -1,5 +1,6 @@
 package com.waterfogsw.glucose.user.application.port
 
+import com.waterfogsw.glucose.user.application.port.outbound.UserRepository
 import com.waterfogsw.glucose.user.domain.entity.User
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap

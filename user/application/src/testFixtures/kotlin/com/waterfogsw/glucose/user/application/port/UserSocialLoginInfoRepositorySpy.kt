@@ -1,6 +1,7 @@
 package com.waterfogsw.glucose.user.application.port
 
 import com.waterfogsw.glucose.common.support.vo.Email
+import com.waterfogsw.glucose.user.application.port.outbound.UserSocialLoginInfoRepository
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap

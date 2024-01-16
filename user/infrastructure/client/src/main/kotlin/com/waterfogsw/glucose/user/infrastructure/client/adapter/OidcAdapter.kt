@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.infrastructure.client.adapter
 
-import com.waterfogsw.glucose.user.application.port.OidcPort
+import com.waterfogsw.glucose.user.application.port.outbound.OidcPort
 import com.waterfogsw.glucose.user.domain.enums.Provider
 import com.waterfogsw.glucose.user.infrastructure.client.adapter.strategy.OidcStrategy
 import com.waterfogsw.glucose.user.infrastructure.client.adapter.strategy.OidcStrategyFactory

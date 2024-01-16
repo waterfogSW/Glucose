@@ -1,15 +1,18 @@
-package com.waterfogsw.glucose.user.application.usecase
+package com.waterfogsw.glucose.user.application.port.inbound
 
+import com.waterfogsw.glucose.common.support.vo.Email
+import com.waterfogsw.glucose.common.support.vo.URL
 import com.waterfogsw.glucose.user.domain.enums.Provider
 import java.util.*
 
-
-fun interface UserSocialLoginUseCase {
+fun interface UserRegisterUseCase {
 
     fun invoke(command: Command): Result
 
     data class Command(
-        val authorizationCode: String,
+        val name: String,
+        val email: Email,
+        val picture: URL?,
         val provider: Provider,
     )
 
@@ -22,4 +25,6 @@ fun interface UserSocialLoginUseCase {
             val throwable: Throwable
         ) : Result()
     }
+
+
 }

@@ -1,7 +1,7 @@
 package com.waterfogsw.glucose.user.infrastructure.persistence.adapter
 
 import com.waterfogsw.glucose.common.support.vo.Email
-import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepository
+import com.waterfogsw.glucose.user.application.port.outbound.UserSocialLoginInfoRepository
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import com.waterfogsw.glucose.user.infrastructure.persistence.entity.UserSocialLoginInfoJpaEntity
 import com.waterfogsw.glucose.user.infrastructure.persistence.repository.UserSocialLoginInfoJpaRepository

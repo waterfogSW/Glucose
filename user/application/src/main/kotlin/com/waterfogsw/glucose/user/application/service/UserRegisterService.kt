@@ -1,13 +1,14 @@
-package com.waterfogsw.glucose.user.application.usecase
+package com.waterfogsw.glucose.user.application.service
 
-import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepository
-import com.waterfogsw.glucose.user.application.port.UserRepository
+import com.waterfogsw.glucose.user.application.port.inbound.UserRegisterUseCase
+import com.waterfogsw.glucose.user.application.port.outbound.UserSocialLoginInfoRepository
+import com.waterfogsw.glucose.user.application.port.outbound.UserRepository
 import com.waterfogsw.glucose.user.domain.entity.User
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import org.springframework.stereotype.Service
 
 @Service
-class UserRegister(
+class UserRegisterService(
     private val userRepository: UserRepository,
     private val userSocialLoginInfoRepository: UserSocialLoginInfoRepository,
 ) : UserRegisterUseCase {

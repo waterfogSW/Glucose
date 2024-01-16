@@ -1,4 +1,4 @@
-package com.waterfogsw.glucose.user.application.port
+package com.waterfogsw.glucose.user.application.port.outbound
 
 import com.waterfogsw.glucose.common.support.vo.Email
 import com.waterfogsw.glucose.common.support.vo.URL

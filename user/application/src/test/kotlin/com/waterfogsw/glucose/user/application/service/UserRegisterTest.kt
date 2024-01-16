@@ -1,8 +1,9 @@
-package com.waterfogsw.glucose.user.application.usecase
+package com.waterfogsw.glucose.user.application.service
 
 import com.waterfogsw.glucose.common.support.vo.Email
 import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepositorySpy
 import com.waterfogsw.glucose.user.application.port.UserRepositorySpy
+import com.waterfogsw.glucose.user.application.port.inbound.UserRegisterUseCase
 import com.waterfogsw.glucose.user.domain.enums.Provider
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
@@ -16,7 +17,7 @@ class UserRegisterTest: DescribeSpec({
             // arrange
             val userRepository = UserRepositorySpy()
             val userSocialLoginInfoRepository = UserSocialLoginInfoRepositorySpy()
-            val sut = UserRegister(
+            val sut = UserRegisterDomainService(
                 userRepository = userRepository,
                 userSocialLoginInfoRepository = userSocialLoginInfoRepository
             )
