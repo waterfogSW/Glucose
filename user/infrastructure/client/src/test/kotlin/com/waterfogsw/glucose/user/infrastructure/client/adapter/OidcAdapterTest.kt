@@ -26,7 +26,7 @@ class OidcAdapterTest : DescribeSpec({
             userInfo.sub shouldBe "sub"
             userInfo.name shouldBe "name"
             userInfo.email shouldBe Email("test@test.com")
-            userInfo.profileImage shouldBe URL("https://test.com/1.jpg")
+            userInfo.picture shouldBe URL("https://test.com/1.jpg")
         }
     }
 

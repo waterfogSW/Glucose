@@ -25,7 +25,7 @@ class OidcAdapter(
             sub = idTokenInfo.sub,
             name = idTokenInfo.name,
             email = idTokenInfo.email,
-            profileImage = idTokenInfo.picture,
+            picture = idTokenInfo.picture,
         )
     }
 }
