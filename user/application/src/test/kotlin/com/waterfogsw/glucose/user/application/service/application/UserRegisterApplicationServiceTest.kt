@@ -1,14 +1,15 @@
-package com.waterfogsw.glucose.user.application.service
+package com.waterfogsw.glucose.user.application.service.application
 
 import com.waterfogsw.glucose.common.support.vo.Email
 import com.waterfogsw.glucose.user.application.port.UserSocialLoginInfoRepositorySpy
 import com.waterfogsw.glucose.user.application.port.UserRepositorySpy
 import com.waterfogsw.glucose.user.application.port.inbound.UserRegisterUseCase
+import com.waterfogsw.glucose.user.application.service.applicaiton.UserRegisterApplicationService
 import com.waterfogsw.glucose.user.domain.enums.Provider
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
-class UserRegisterTest: DescribeSpec({
+class UserRegisterApplicationServiceTest: DescribeSpec({
 
     describe("유저 가입 유스케이스") {
 
@@ -17,7 +18,7 @@ class UserRegisterTest: DescribeSpec({
             // arrange
             val userRepository = UserRepositorySpy()
             val userSocialLoginInfoRepository = UserSocialLoginInfoRepositorySpy()
-            val sut = UserRegisterDomainService(
+            val sut = UserRegisterApplicationService(
                 userRepository = userRepository,
                 userSocialLoginInfoRepository = userSocialLoginInfoRepository
             )
