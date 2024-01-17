@@ -9,6 +9,7 @@ jar.enabled = true
 
 dependencies {
     implementation(project(":common:ulid"))
+    implementation(project(":common:jwt"))
     implementation(project(":common:support"))
     implementation(project(":user:domain"))
 

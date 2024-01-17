@@ -1,17 +1,20 @@
 package com.waterfogsw.glucose.user.application.service.applicaiton
 
-import com.waterfogsw.glucose.user.application.port.inbound.UserRegisterUseCase
+import com.waterfogsw.glucose.user.application.common.security.jwt.service.UserJwtTokenService
 import com.waterfogsw.glucose.user.application.port.inbound.UserSocialLoginUseCase
 import com.waterfogsw.glucose.user.application.port.outbound.OidcPort
+import com.waterfogsw.glucose.user.application.service.domain.UserDomainService
 import com.waterfogsw.glucose.user.application.service.domain.UserSocialLoginInfoDomainService
+import com.waterfogsw.glucose.user.domain.entity.User
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import org.springframework.stereotype.Service
 
 @Service
 class UserSocialLoginApplicationService(
     private val oidcPort: OidcPort,
+    private val userJwtTokenService: UserJwtTokenService,
+    private val userDomainService: UserDomainService,
     private val userSocialLoginInfoDomainService: UserSocialLoginInfoDomainService,
-    private val userRegisterUseCase: UserRegisterUseCase,
 ) : UserSocialLoginUseCase {
 
     override fun invoke(command: UserSocialLoginUseCase.Command): UserSocialLoginUseCase.Result {
@@ -20,32 +23,24 @@ class UserSocialLoginApplicationService(
             provider = command.provider,
         )
 
-        val userSocialLoginInfo: UserSocialLoginInfo? =
+        val userSocialLoginInfo: UserSocialLoginInfo =
             userSocialLoginInfoDomainService.findByEmail(email = userInfo.email)
-
-        if (userSocialLoginInfo == null) {
-            val registerResult: UserRegisterUseCase.Result = userRegisterUseCase.invoke(
-                UserRegisterUseCase.Command(
+                ?: return UserSocialLoginUseCase.Result.UserNotRegistered(
                     name = userInfo.name,
                     email = userInfo.email,
-                    picture = userInfo.picture,
                     provider = command.provider,
+                    picture = userInfo.picture,
                 )
-            )
 
-            return when (registerResult) {
-                is UserRegisterUseCase.Result.Success -> {
-                    UserSocialLoginUseCase.Result.Success(userId = registerResult.userId)
-                }
+        val user: User = userDomainService.getById(userSocialLoginInfo.userId)
 
-                is UserRegisterUseCase.Result.Failure -> {
-                    UserSocialLoginUseCase.Result.Failure(throwable = registerResult.throwable)
-                }
-            }
+        val accessToken: String = userJwtTokenService.createAccessToken(user = user)
+        val refreshToken: String = userJwtTokenService.createRefreshToken(user = user)
 
-        }
-
-        return UserSocialLoginUseCase.Result.Success(userId = userSocialLoginInfo.userId)
+        return UserSocialLoginUseCase.Result.Success(
+            accessToken = accessToken,
+            refreshToken = refreshToken,
+        )
     }
 
 }

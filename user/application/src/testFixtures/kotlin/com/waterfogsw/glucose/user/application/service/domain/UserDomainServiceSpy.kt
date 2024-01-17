@@ -21,8 +21,12 @@ class UserDomainServiceSpy : UserDomainService {
         ).also { userBucket[it.id] = it }
     }
 
-    fun findById(id: UUID): User? {
-        return userBucket[id]
+    override fun getById(id: UUID): User {
+        return userBucket[id]?: throw NoSuchElementException()
+    }
+
+    fun save(user: User) {
+        userBucket[user.id] = user
     }
 
     fun existsByEmail(email: Email): Boolean {

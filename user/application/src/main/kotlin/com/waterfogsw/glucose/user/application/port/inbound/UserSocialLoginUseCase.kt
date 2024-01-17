@@ -1,7 +1,8 @@
 package com.waterfogsw.glucose.user.application.port.inbound
 
+import com.waterfogsw.glucose.common.support.vo.Email
+import com.waterfogsw.glucose.common.support.vo.URL
 import com.waterfogsw.glucose.user.domain.enums.Provider
-import java.util.*
 
 
 fun interface UserSocialLoginUseCase {
@@ -15,11 +16,15 @@ fun interface UserSocialLoginUseCase {
 
     sealed class Result {
         data class Success(
-            val userId: UUID
+            val accessToken: String,
+            val refreshToken: String,
         ) : Result()
 
-        data class Failure(
-            val throwable: Throwable
+        data class UserNotRegistered(
+            val name: String,
+            val email: Email,
+            val provider: Provider,
+            val picture: URL?,
         ) : Result()
     }
 }

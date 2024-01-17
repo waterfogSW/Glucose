@@ -1,0 +1,8 @@
+user:
+  jwt:
+    access:
+      expire-seconds: 60 * 60 * 2 # 2 hours
+      secret: ${USER_JWT_ACCESS_SECRET}
+    refresh:
+      expire-seconds: 60 * 60 * 24 * 7 # 14 days
+      secret: ${USER_JWT_REFRESH_SECRET}

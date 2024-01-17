@@ -10,7 +10,6 @@ class UserSocialLoginInfoDomainServiceSpy : UserSocialLoginInfoDomainService {
 
     private val userSocialLoginInfoBucket = ConcurrentHashMap<UUID, UserSocialLoginInfo>()
 
-
     override fun create(
         userId: UUID,
         email: Email,
