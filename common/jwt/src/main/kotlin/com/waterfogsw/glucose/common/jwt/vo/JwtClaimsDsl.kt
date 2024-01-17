@@ -17,11 +17,35 @@ class JwtClaimsBuilder {
     private var registeredClaims = JwtClaims.RegisteredClaims()
     private val customClaims = mutableMapOf<String, Any>()
 
+    /**
+     * Sets the registered claims for a JSON Web Token (JWT) using the provided DSL.
+     * ```
+     * sub: Subject
+     * exp: Expiration Time
+     * iat: Issued At
+     * nbf: Not Before
+     * iss: Issuer
+     * aud: Audience
+     * jti: JWT ID
+     * ```
+     *
+     * @param init The DSL for setting registered claims.
+     * @see JwtClaims.registeredClaims
+    **/
     fun registeredClaims(init: RegisteredClaimsBuilder.() -> Unit) {
         val builder = RegisteredClaimsBuilder().apply(init)
         registeredClaims = builder.build()
     }
 
+    /**
+     * Sets the custom claims for a JSON Web Token (JWT) using the provided DSL.
+     * ```
+     * this["customKey1"] = "customValue1"
+     * this["customKey2"] = "customValue2"
+     * ```
+     * @param block The DSL for setting custom claims.
+     * @see JwtClaims.customClaims
+     */
     fun customClaims(block: MutableMap<String, Any>.() -> Unit) {
         customClaims.apply(block)
     }
