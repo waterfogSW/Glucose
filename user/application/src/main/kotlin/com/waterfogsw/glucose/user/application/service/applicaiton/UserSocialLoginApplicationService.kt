@@ -3,14 +3,14 @@ package com.waterfogsw.glucose.user.application.service.applicaiton
 import com.waterfogsw.glucose.user.application.port.inbound.UserRegisterUseCase
 import com.waterfogsw.glucose.user.application.port.inbound.UserSocialLoginUseCase
 import com.waterfogsw.glucose.user.application.port.outbound.OidcPort
-import com.waterfogsw.glucose.user.application.port.outbound.UserSocialLoginInfoRepository
+import com.waterfogsw.glucose.user.application.service.domain.UserSocialLoginInfoDomainService
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import org.springframework.stereotype.Service
 
 @Service
 class UserSocialLoginApplicationService(
     private val oidcPort: OidcPort,
-    private val userSocialLoginInfoRepository: UserSocialLoginInfoRepository,
+    private val userSocialLoginInfoDomainService: UserSocialLoginInfoDomainService,
     private val userRegisterUseCase: UserRegisterUseCase,
 ) : UserSocialLoginUseCase {
 
@@ -21,7 +21,7 @@ class UserSocialLoginApplicationService(
         )
 
         val userSocialLoginInfo: UserSocialLoginInfo? =
-            userSocialLoginInfoRepository.findByEmail(email = userInfo.email)
+            userSocialLoginInfoDomainService.findByEmail(email = userInfo.email)
 
         if (userSocialLoginInfo == null) {
             val registerResult: UserRegisterUseCase.Result = userRegisterUseCase.invoke(

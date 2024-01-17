@@ -1,8 +1,8 @@
 package com.waterfogsw.glucose.user.infrastructure.client.adapter.strategy
 
+import com.waterfogsw.glucose.common.support.vo.Email
+import com.waterfogsw.glucose.common.support.vo.URL
 import com.waterfogsw.glucose.user.domain.enums.Provider
-import com.waterfogsw.glucose.user.domain.vo.Email
-import com.waterfogsw.glucose.user.domain.vo.URL
 
 class MockOidcStrategyFactory : OidcStrategyFactory {
 
