@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.infrastructure.persistence.entity
 
-import com.waterfogsw.glucose.common.support.vo.Email
+import com.waterfogsw.glucose.support.common.vo.Email
 import com.waterfogsw.glucose.user.domain.entity.UserSocialLoginInfo
 import com.waterfogsw.glucose.user.domain.enums.Provider
 import jakarta.persistence.*

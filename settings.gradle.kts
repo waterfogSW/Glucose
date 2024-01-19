@@ -1,16 +1,16 @@
 rootProject.name = "glucose-backend"
 
 /**
- * common
+ * support
  */
-include(":common:support")
-project(":common:support").projectDir = file("common/support")
+include(":support:common")
+project(":support:common").projectDir = file("support/common")
 
-include(":common:ulid")
-project(":common:ulid").projectDir = file("common/ulid")
+include(":support:ulid")
+project(":support:ulid").projectDir = file("support/ulid")
 
-include(":common:jwt")
-project(":common:jwt").projectDir = file("common/jwt")
+include(":support:jwt")
+project(":support:jwt").projectDir = file("support/jwt")
 
 /**
  * user

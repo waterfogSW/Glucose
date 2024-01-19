@@ -1,6 +1,6 @@
 
 dependencies {
-    implementation(project(":common:support"))
+    implementation(project(":support:common"))
     implementation(project(":user:domain"))
     implementation(project(":user:application"))
 

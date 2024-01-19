@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.application.service.application
 
-import com.waterfogsw.glucose.common.support.vo.Email
+import com.waterfogsw.glucose.support.common.vo.Email
 import com.waterfogsw.glucose.user.application.port.inbound.UserRegisterUseCase
 import com.waterfogsw.glucose.user.application.service.applicaiton.UserRegisterApplicationService
 import com.waterfogsw.glucose.user.application.service.domain.UserDomainServiceSpy

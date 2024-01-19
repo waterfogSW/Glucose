@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.domain.entity
 
-import com.waterfogsw.glucose.common.support.vo.Email
+import com.waterfogsw.glucose.support.common.vo.Email
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldNotBe
 

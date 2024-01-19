@@ -1,7 +1,7 @@
 package com.waterfogsw.glucose.user.application.common.security.jwt.service.impl
 
-import com.waterfogsw.glucose.common.jwt.util.JwtTokenProvider
-import com.waterfogsw.glucose.common.jwt.vo.JwtClaims
+import com.waterfogsw.glucose.support.jwt.util.JwtTokenProvider
+import com.waterfogsw.glucose.support.jwt.vo.JwtClaims
 import com.waterfogsw.glucose.user.application.common.security.jwt.UserJwtTokenType
 import com.waterfogsw.glucose.user.application.common.security.jwt.property.UserJwtTokenConfigProperties
 import com.waterfogsw.glucose.user.application.common.security.jwt.service.UserJwtTokenService

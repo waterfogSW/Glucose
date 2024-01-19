@@ -8,9 +8,9 @@ jar.enabled = true
 
 
 dependencies {
-    implementation(project(":common:ulid"))
-    implementation(project(":common:jwt"))
-    implementation(project(":common:support"))
+    implementation(project(":support:ulid"))
+    implementation(project(":support:jwt"))
+    implementation(project(":support:common"))
     implementation(project(":user:domain"))
 
     implementation("org.springframework.boot:spring-boot:${Version.SPRING_BOOT}")

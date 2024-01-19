@@ -1,7 +1,7 @@
 package com.waterfogsw.glucose.user.application.port.inbound
 
-import com.waterfogsw.glucose.common.support.vo.Email
-import com.waterfogsw.glucose.common.support.vo.URL
+import com.waterfogsw.glucose.support.common.vo.Email
+import com.waterfogsw.glucose.support.common.vo.URL
 import com.waterfogsw.glucose.user.domain.enums.Provider
 import java.util.*
 

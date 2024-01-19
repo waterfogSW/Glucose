@@ -7,8 +7,8 @@ bootJar.enabled = false
 jar.enabled = true
 
 dependencies {
-    implementation(project(":common:jwt"))
-    implementation(project(":common:support"))
+    implementation(project(":support:jwt"))
+    implementation(project(":support:common"))
 
     implementation(project(":user:domain"))
     implementation(project(":user:application"))

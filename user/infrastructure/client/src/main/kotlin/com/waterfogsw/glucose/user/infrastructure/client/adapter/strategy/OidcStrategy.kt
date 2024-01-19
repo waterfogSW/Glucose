@@ -1,7 +1,7 @@
 package com.waterfogsw.glucose.user.infrastructure.client.adapter.strategy
 
-import com.waterfogsw.glucose.common.support.vo.Email
-import com.waterfogsw.glucose.common.support.vo.URL
+import com.waterfogsw.glucose.support.common.vo.Email
+import com.waterfogsw.glucose.support.common.vo.URL
 
 
 interface OidcStrategy {
