@@ -15,6 +15,7 @@ object Version {
 
     const val SPRINGDOC_OPENAPI = "2.3.0"
 
+    const val UUID_CREATOR = "5.3.3"
     const val ULID_CREATOR = "5.2.2"
     const val OPENFEIGN = "4.1.0"
 
