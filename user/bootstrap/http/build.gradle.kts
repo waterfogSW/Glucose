@@ -1,4 +1,6 @@
 dependencies {
+    implementation(project(":common:support"))
+
     implementation(project(":user:domain"))
     implementation(project(":user:application"))
     implementation(project(":user:infrastructure:client"))

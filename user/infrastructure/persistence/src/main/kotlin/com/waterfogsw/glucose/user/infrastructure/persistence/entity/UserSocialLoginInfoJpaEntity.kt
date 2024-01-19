@@ -30,8 +30,8 @@ class UserSocialLoginInfoJpaEntity(
     var userId: UUID = userId
         private set
 
-    @Column(name = "oauth2_provider", nullable = false)
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "provider", nullable = false, columnDefinition = "varchar(255)")
     var provider: Provider = provider
         private set
 

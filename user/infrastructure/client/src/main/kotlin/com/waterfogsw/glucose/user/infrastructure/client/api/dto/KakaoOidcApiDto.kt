@@ -1,5 +1,8 @@
 package com.waterfogsw.glucose.user.infrastructure.client.api.dto
 
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.databind.PropertyNamingStrategies
+import com.fasterxml.jackson.databind.annotation.JsonNaming
 import feign.form.FormProperty
 
 /**
@@ -43,6 +46,7 @@ class KakaoOidcApiDto {
      *
      * @see <a href="https://developers.kakao.com/docs/latest/ko/kakaologin/rest-api#request-token">토큰 발급 요청</a>
      */
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy::class)
     data class GetTokenResponse(
         val accessToken: String,
         val tokenType: String,
@@ -85,6 +89,7 @@ class KakaoOidcApiDto {
         val nickname: String,
         val picture: String,
         val email: String,
+        @JsonProperty("auth_time")
         val authTime: Int,
     )
 }
