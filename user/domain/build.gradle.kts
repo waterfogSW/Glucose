@@ -7,6 +7,5 @@ bootJar.enabled = false
 jar.enabled = true
 
 dependencies {
-    implementation(project(":support:ulid"))
     implementation(project(":support:common"))
 }

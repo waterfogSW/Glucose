@@ -6,9 +6,6 @@ rootProject.name = "glucose-backend"
 include(":support:common")
 project(":support:common").projectDir = file("support/common")
 
-include(":support:ulid")
-project(":support:ulid").projectDir = file("support/ulid")
-
 include(":support:jwt")
 project(":support:jwt").projectDir = file("support/jwt")
 

@@ -1,13 +1,13 @@
 package com.waterfogsw.glucose.user.domain.entity
 
+import com.waterfogsw.glucose.support.common.util.UuidCreator
 import com.waterfogsw.glucose.support.common.vo.Email
 import com.waterfogsw.glucose.support.common.vo.URL
-import com.waterfogsw.glucose.support.ulid.UlidUtil
 import java.time.LocalDateTime
 import java.util.*
 
 data class User(
-    val id: UUID = UlidUtil.createUlid(),
+    val id: UUID = UuidCreator.create(),
     val name: String,
     val email: Email,
     val statusMessage: String? = null,
