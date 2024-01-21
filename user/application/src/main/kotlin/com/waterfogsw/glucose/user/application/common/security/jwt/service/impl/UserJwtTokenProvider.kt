@@ -23,9 +23,8 @@ class UserJwtTokenProvider(
             }
             customClaims {
                 this["type"] = UserJwtTokenType.Access.value
-                this["id"] = user.name
                 this["name"] = user.name
-                this["email"] = user.email
+                this["email"] = user.email.value
                 this["picture"] = user.picture.toString()
             }
         }
