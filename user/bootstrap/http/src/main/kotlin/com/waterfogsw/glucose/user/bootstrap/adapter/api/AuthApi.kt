@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/auth", produces = ["application/json;charset=utf-8"])
 interface AuthApi {
 
-    @Operation(summary = "소셜 로그인 API - 회원 가입, 로그인, 토큰 발급")
+    @Operation(summary = "소셜 로그인 API - 로그인 토큰 발급")
     @GetMapping("/login/oauth2/code/{provider}")
     @ResponseStatus(HttpStatus.OK)
     fun socialLogin(
