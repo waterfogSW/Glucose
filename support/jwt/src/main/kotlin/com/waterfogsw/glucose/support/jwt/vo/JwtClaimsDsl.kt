@@ -31,7 +31,7 @@ class JwtClaimsBuilder {
      *
      * @param init The DSL for setting registered claims.
      * @see JwtClaims.registeredClaims
-    **/
+     **/
     fun registeredClaims(init: RegisteredClaimsBuilder.() -> Unit) {
         val builder = RegisteredClaimsBuilder().apply(init)
         registeredClaims = builder.build()

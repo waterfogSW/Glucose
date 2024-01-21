@@ -1,4 +1,3 @@
-
 dependencies {
     implementation(project(":support:common"))
     implementation(project(":user:domain"))

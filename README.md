@@ -179,7 +179,7 @@
 
 - 도메인 모델을 정의하는 모듈이므로, Domain Hexagon으로 명명하였습니다.
 - 애플리케이션의 핵심 로직을 담당하는 모듈로, 도메인을 정의하고 있습니다.
-- POJO로 구현되어 있습니다. 
+- POJO로 구현되어 있습니다.
 - common 모듈내 라이브러리 외 의존성을 가지지 않습니다.
 
 **Application Hexagon**
@@ -193,20 +193,22 @@
 - 외부 인프라와의 통신을 위한 Secondary Adapter를 정의합니다.
 - Secondary Adapter 및 Domain, Application, Spring Boot, Common 모듈내 라이브러리 의존성을 가집니다.
 - 외부 인프라별로 Module을 분리해 관리합니다
-  - infrastructure/kafka
-  - infrastructure/persistence
-  - infrastructure/redis
+    - infrastructure/kafka
+    - infrastructure/persistence
+    - infrastructure/redis
 - 각 모듈별로 config class를 정의하며, application-{module name}.yaml 파일을 통해 각 모듈별로 설정을 관리합니다.
-  - application-kafka.yaml
-  - application-persistence.yaml
-  - application-redis.yaml
+    - application-kafka.yaml
+    - application-persistence.yaml
+    - application-redis.yaml
 
 **Bootstrap Hexagon**
 
 - 여러 의존성을 조합해 하나의 애플리케이션 서버를 구성하는 모듈이므로 Bootstrap Hexagon으로 명명하였습니다.
 - 외부 요청을 받아 Use Case를 실행하기 위한 Primary Adapter를 정의합니다. (RestController, Kafka Consumer 등)
-- Primary Adapter관련 인프라 및 Domain, Application, Infrastructure 및 Spring Boot, Common 모듈내 라이브러리 의존성을 가집니다.
-- Infrastructure 모듈과 같이 애플리케이션이 제공할 각 서비스별로 Module을 분리해 제공하는 방법도 고려해보았지만, 애플리케이션 서버마다 제공하는 API가 서로 다른경우가 훨씬 많기 때문에 모듈분리의 효용성이 떨어진다고 판단하여 Bootstrap 모듈에 Primary Adapter를 정의하였습니다.
+- Primary Adapter관련 인프라 및 Domain, Application, Infrastructure 및 Spring Boot, Common 모듈내 라이브러리 의존성을
+  가집니다.
+- Infrastructure 모듈과 같이 애플리케이션이 제공할 각 서비스별로 Module을 분리해 제공하는 방법도 고려해보았지만, 애플리케이션 서버마다 제공하는 API가 서로
+  다른경우가 훨씬 많기 때문에 모듈분리의 효용성이 떨어진다고 판단하여 Bootstrap 모듈에 Primary Adapter를 정의하였습니다.
 
 ## 🚀 구현
 
@@ -243,6 +245,7 @@
 ### 소셜 로그인 - 회원가입이 안되어있을때 처리
 
 **문제 상황**
+
 - 설계 : 소셜 로그인만을 사용
 - 인증 절차 : 클라이언트는 소셜 로그인 후 발급받은 authorization code를 서버로 전송합니다.
 - 사용자 계정 확인 : 서버는 소셜 로그인 인증 서버로부터 id_token을 받고, id_token에서 추출한 이메일에 해당하는 계정이 존재하는지 확인합니다.
@@ -251,16 +254,14 @@
 **해결방안**
 
 - id_token을 클라이언트에게 전달
-  - id_token을 클라이언트에 전달하는 것은 보안상 권장되지 않음
-  - 클라이언트는 id_token을 서버로 전송해야하는데, 이때 id_token을 탈취당할 수 있음
-  - 중간자 공격, 피싱공격, XSS 등의 공격에 취약
+    - id_token을 클라이언트에 전달하는 것은 보안상 권장되지 않음
+    - 클라이언트는 id_token을 서버로 전송해야하는데, 이때 id_token을 탈취당할 수 있음
+    - 중간자 공격, 피싱공격, XSS 등의 공격에 취약
 - 서버에서 사용자 정보를 임시로 저장
-  - 임시 데이터를 저장하고 관리하는 것은 시스템의 복잡성을 증가시킴 
-  - 데이터의 유효성을 관리하고, 만료된 데이터를 제때에 삭제하는 등의 추가적인 관리 작업이 필요
+    - 임시 데이터를 저장하고 관리하는 것은 시스템의 복잡성을 증가시킴
+    - 데이터의 유효성을 관리하고, 만료된 데이터를 제때에 삭제하는 등의 추가적인 관리 작업이 필요
 - ✅ **id_token을 resolve해 클라이언트에 전달**
-  - 사용자에게 필요한 정보만 추출하고 전달함으로써, 불필요한 개인 정보의 노출을 방지
-
-
+    - 사용자에게 필요한 정보만 추출하고 전달함으로써, 불필요한 개인 정보의 노출을 방지
 
 ## 📝 API 문서
 
