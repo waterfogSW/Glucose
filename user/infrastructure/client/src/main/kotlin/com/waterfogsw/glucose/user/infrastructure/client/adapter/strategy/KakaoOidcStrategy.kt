@@ -1,9 +1,8 @@
 package com.waterfogsw.glucose.user.infrastructure.client.adapter.strategy
 
-import com.waterfogsw.glucose.support.jwt.util.JwtTokenProvider
 import com.waterfogsw.glucose.support.common.vo.Email
 import com.waterfogsw.glucose.support.common.vo.URL
-
+import com.waterfogsw.glucose.support.jwt.util.JwtTokenProvider
 import com.waterfogsw.glucose.user.infrastructure.client.api.KakaoOidcApi
 import com.waterfogsw.glucose.user.infrastructure.client.api.dto.KakaoOidcApiDto
 import com.waterfogsw.glucose.user.infrastructure.client.common.properties.OidcClientProperties

@@ -97,9 +97,16 @@ object JwtTokenProvider {
         token: String,
         algorithm: Algorithm,
     ): Result<JwtClaims> {
-        return runCatching { JWT.require(algorithm).build().verify(token) }
-            .mapCatching { claims -> JwtClaims.from(claims) }
-            .onFailure { exception -> handleException(exception) }
+        return runCatching {
+            JWT
+                .require(algorithm)
+                .build()
+                .verify(token)
+        }.mapCatching { claims ->
+            JwtClaims.from(claims)
+        }.onFailure { exception ->
+            handleException(exception)
+        }
     }
 
     /**

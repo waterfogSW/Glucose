@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 @Component
 class OidcStrategyFactoryImpl(
     private val applicationContext: ApplicationContext
-): OidcStrategyFactory {
+) : OidcStrategyFactory {
     override fun getStrategy(provider: Provider): OidcStrategy {
         return when (provider) {
             Provider.KAKAO -> {

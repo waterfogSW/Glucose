@@ -13,7 +13,7 @@ import java.util.*
 @Component
 class UserJwtTokenProvider(
     private val properties: UserJwtTokenConfigProperties
-): UserJwtTokenService {
+) : UserJwtTokenService {
 
     override fun createAccessToken(user: User): String {
         val claims = JwtClaims {

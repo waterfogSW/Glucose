@@ -22,7 +22,7 @@ class UserDomainServiceSpy : UserDomainService {
     }
 
     override fun getById(id: UUID): User {
-        return userBucket[id]?: throw NoSuchElementException()
+        return userBucket[id] ?: throw NoSuchElementException()
     }
 
     fun save(user: User) {

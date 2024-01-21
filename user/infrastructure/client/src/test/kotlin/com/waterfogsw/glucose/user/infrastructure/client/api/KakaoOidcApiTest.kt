@@ -1,8 +1,8 @@
 package com.waterfogsw.glucose.user.infrastructure.client.api
 
 import com.waterfogsw.glucose.user.infrastructure.client.ClientIntegrationTestApplication
-import com.waterfogsw.glucose.user.infrastructure.client.api.dto.KakaoOidcApiDtoFixtures.getTokenRequest
 import com.waterfogsw.glucose.user.infrastructure.client.api.dto.KakaoOidcApiDto
+import com.waterfogsw.glucose.user.infrastructure.client.api.dto.KakaoOidcApiDtoFixtures.getTokenRequest
 import com.waterfogsw.glucose.user.infrastructure.client.mock.KakaoOidcMockServerConfig
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldNotBe

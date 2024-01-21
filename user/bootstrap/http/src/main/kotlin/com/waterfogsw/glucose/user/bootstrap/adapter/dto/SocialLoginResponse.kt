@@ -16,12 +16,12 @@ sealed class SocialLoginResponse {
     data class Success(
         val accessToken: String,
         val refreshToken: String,
-    ): SocialLoginResponse()
+    ) : SocialLoginResponse()
 
     data class UserNotRegistered(
         val name: String,
         val email: Email,
         val provider: Provider,
         val picture: URL?,
-    ): SocialLoginResponse()
+    ) : SocialLoginResponse()
 }
