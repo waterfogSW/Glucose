@@ -1,0 +1,63 @@
+[versions]
+
+java = "21"
+spring-boot = "3.2.1"
+spring-boot-dependency-management = "1.1.4"
+kotlin = "1.9.21"
+mockk = "1.13.7"
+spring-mockk = "4.0.2"
+kotest = "5.6.0"
+kotest-extensions-spring = "1.1.3"
+springdoc-openapi = "2.3.0"
+uuid-creator = "5.3.3"
+ulid-creator = "5.2.2"
+openfeign = "4.1.0"
+spring-cloud = "2023.0.0"
+spring-cloud-contract = "4.0.1"
+mysql = "8.0.33"
+h2 = "2.2.224"
+jackson = "2.16.1"
+auth0-java-jwt = "4.4.0"
+auth0-jwks-rsa = "0.22.1"
+
+[libraries]
+
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+spring-boot = { group = "org.springframework.boot", name = "spring-boot", version.ref = "spring-boot" }
+spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web", version.ref = "spring-boot" }
+spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test", version.ref = "spring-boot" }
+spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa", version.ref = "spring-boot" }
+
+spring-boot-devtools = { group = "org.springframework.boot", name = "spring-boot-devtools", version.ref = "spring-boot" }
+spring-boot-docker-compose = { group = "org.springframework.boot", name = "spring-boot-docker-compose", version.ref = "spring-boot" }
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+spring-mockk = { group = "com.ninja-squad", name = "springmockk", version.ref = "spring-mockk" }
+kotest-runner-junit5 = { group = "io.kotest", name = "kotest-runner-junit5", version.ref = "kotest" }
+kotest-assertions-core = { group = "io.kotest", name = "kotest-assertions-core", version.ref = "kotest" }
+kotest-extensions-spring = { group = "io.kotest.extensions", name = "kotest-extensions-spring", version.ref = "kotest-extensions-spring" }
+springdoc-openapi-starter-webmvc-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc-openapi" }
+uuid-creator = { group = "com.github.f4b6a3", name = "uuid-creator", version.ref = "uuid-creator" }
+ulid-creator = { group = "com.github.f4b6a3", name = "ulid-creator", version.ref = "ulid-creator" }
+spring-cloud-starter-openfeign = { group = "org.springframework.cloud", name = "spring-cloud-starter-openfeign", version.ref = "openfeign" }
+spring-cloud-starter-contract-stub-runner = { group = "org.springframework.cloud", name = "spring-cloud-starter-contract-stub-runner", version.ref = "spring-cloud-contract" }
+spring-boot-configuration-processor = { group = "org.springframework.boot", name = "spring-boot-configuration-processor", version.ref = "spring-boot" }
+mysql-connector-java = { group = "mysql", name = "mysql-connector-java", version.ref = "mysql" }
+h2 = { group = "com.h2database", name = "h2", version.ref = "h2" }
+jackson-module-kotlin = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin", version.ref = "jackson" }
+jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson" }
+java-jwt = { group = "com.auth0", name = "java-jwt", version.ref = "auth0-java-jwt" }
+jwks-rsa = { group = "com.auth0", name = "jwks-rsa", version.ref = "auth0-jwks-rsa" }
+
+[plugins]
+
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-boot-dependency-management" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-noarg = { id = "org.jetbrains.kotlin.plugin.noarg", version.ref = "kotlin" }
+kotlin-allopen = { id = "org.jetbrains.kotlin.plugin.allopen", version.ref = "kotlin" }
+java-test-fixtures = { id = "java-test-fixtures" }
+idea = { id = "idea" }

@@ -1,4 +1,4 @@
-rootProject.name = "glucose-backend"
+rootProject.name = "glucose"
 
 /**
  * support

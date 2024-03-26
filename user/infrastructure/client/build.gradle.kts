@@ -13,10 +13,10 @@ dependencies {
     implementation(project(":user:domain"))
     implementation(project(":user:application"))
 
-    implementation("org.springframework.boot:spring-boot:${Version.SPRING_BOOT}")
-    implementation("org.springframework.cloud:spring-cloud-starter-openfeign:${Version.OPENFEIGN}")
+    implementation(rootProject.libs.spring.boot)
+    implementation(rootProject.libs.spring.cloud.starter.openfeign)
 
-    testFixturesImplementation("org.springframework.boot:spring-boot-starter-web:${Version.SPRING_BOOT}")
-    testFixturesImplementation("org.springframework.cloud:spring-cloud-starter-contract-stub-runner:${Version.SPRING_COULD_CONTRACT}")
-    testFixturesImplementation("org.springframework.boot:spring-boot-starter-test:${Version.SPRING_BOOT}")
+    testFixturesImplementation(rootProject.libs.spring.boot.starter.web)
+    testFixturesImplementation(rootProject.libs.spring.cloud.starter.contract.stub.runner)
+    testFixturesImplementation(rootProject.libs.spring.boot.starter.test)
 }

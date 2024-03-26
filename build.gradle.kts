@@ -2,11 +2,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-test-fixtures`
-    id("org.springframework.boot") version Version.SPRING_BOOT
-    id("io.spring.dependency-management") version Version.SPRING_BOOT_DEPENDENCY_MANAGEMENT
-    kotlin("jvm") version Version.KOTLIN
-    kotlin("plugin.jpa") version Version.KOTLIN
-    kotlin("plugin.spring") version Version.KOTLIN
+    id(libs.plugins.spring.boot.get().pluginId) version libs.plugins.spring.boot.get().version.toString()
+    id(libs.plugins.spring.dependency.management.get().pluginId) version libs.plugins.spring.dependency.management.get().version.toString()
+    id(libs.plugins.kotlin.jvm.get().pluginId) version libs.plugins.kotlin.jvm.get().version.toString()
+    id(libs.plugins.kotlin.jpa.get().pluginId) version libs.plugins.kotlin.jpa.get().version.toString()
+    id(libs.plugins.kotlin.spring.get().pluginId) version libs.plugins.kotlin.spring.get().version.toString()
 }
 
 allprojects {
@@ -19,37 +19,44 @@ allprojects {
 }
 
 subprojects {
-    apply(plugin = "java-test-fixtures")
-    apply(plugin = "idea")
-    apply(plugin = "kotlin")
-    apply(plugin = "kotlin-spring")
-    apply(plugin = "kotlin-jpa")
-    apply(plugin = "kotlin-kapt")
-    apply(plugin = "kotlin-noarg")
-    apply(plugin = "kotlin-allopen")
-    apply(plugin = "org.springframework.boot")
-    apply(plugin = "io.spring.dependency-management")
+    apply(plugin = rootProject.libs.plugins.java.test.fixtures.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.idea.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.kotlin.jvm.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.kotlin.jpa.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.kotlin.spring.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.kotlin.kapt.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.kotlin.noarg.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.kotlin.allopen.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.spring.boot.get().pluginId)
+    apply(plugin = rootProject.libs.plugins.spring.dependency.management.get().pluginId)
 
     dependencies {
-        implementation("org.jetbrains.kotlin:kotlin-stdlib:${Version.KOTLIN}")
-        implementation("org.jetbrains.kotlin:kotlin-reflect:${Version.KOTLIN}")
+        implementation(rootProject.libs.kotlin.stdlib)
+        implementation(rootProject.libs.kotlin.reflect)
 
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${Version.JACKSON}")
-        implementation("com.fasterxml.jackson.core:jackson-databind:${Version.JACKSON}")
+        implementation(rootProject.libs.jackson.module.kotlin)
+        implementation(rootProject.libs.jackson.databind)
 
-        annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:${Version.SPRING_BOOT}")
+        annotationProcessor(rootProject.libs.spring.boot.configuration.processor)
 
-        testImplementation("io.mockk:mockk:${Version.MOCKK}")
-        testImplementation("com.ninja-squad:springmockk:${Version.SPRING_MOCKK}")
-        testImplementation("io.kotest:kotest-runner-junit5:${Version.KOTEST}")
-        testImplementation("io.kotest:kotest-assertions-core:${Version.KOTEST}")
-        testImplementation("io.kotest.extensions:kotest-extensions-spring:${Version.KOTEST_EXTENSIONS_SPRING}")
-        testImplementation("org.springframework.boot:spring-boot-starter-test:${Version.SPRING_BOOT}")
+        testImplementation(rootProject.libs.mockk)
+        testImplementation(rootProject.libs.spring.mockk)
+        testImplementation(rootProject.libs.kotest.runner.junit5)
+        testImplementation(rootProject.libs.kotest.assertions.core)
+        testImplementation(rootProject.libs.kotest.extensions.spring)
+        testImplementation(rootProject.libs.spring.boot.starter.test)
+
+        testImplementation(rootProject.libs.mockk)
+        testImplementation(rootProject.libs.spring.mockk)
+        testImplementation(rootProject.libs.kotest.runner.junit5)
+        testImplementation(rootProject.libs.kotest.assertions.core)
+        testImplementation(rootProject.libs.kotest.extensions.spring)
+        testImplementation(rootProject.libs.spring.boot.starter.test)
     }
 
     java {
         toolchain {
-            languageVersion.set(JavaLanguageVersion.of(Version.JAVA))
+            languageVersion.set(JavaLanguageVersion.of(rootProject.libs.versions.java.get()))
         }
     }
 
@@ -62,7 +69,7 @@ subprojects {
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs += "-Xjsr305=strict"
-            jvmTarget = Version.JAVA
+            jvmTarget = rootProject.libs.versions.java.get()
         }
     }
 
