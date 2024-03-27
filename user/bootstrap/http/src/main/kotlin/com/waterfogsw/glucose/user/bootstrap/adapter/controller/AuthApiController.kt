@@ -1,6 +1,6 @@
 package com.waterfogsw.glucose.user.bootstrap.adapter.controller
 
-import com.waterfogsw.glucose.user.application.port.inbound.UserSocialLoginUseCase
+import com.waterfogsw.glucose.user.application.port.inbound.SocialLogin
 import com.waterfogsw.glucose.user.bootstrap.adapter.api.AuthApi
 import com.waterfogsw.glucose.user.bootstrap.adapter.dto.RefreshLoginTokenResponse
 import com.waterfogsw.glucose.user.bootstrap.adapter.dto.SocialLoginResponse
@@ -9,24 +9,24 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class AuthApiController(
-    private val userSocialLoginUseCase: UserSocialLoginUseCase,
+    private val userSocialLoginUseCase: SocialLogin,
 ) : AuthApi {
 
     override fun socialLogin(provider: Provider, code: String): SocialLoginResponse {
         val result = userSocialLoginUseCase.invoke(
-            UserSocialLoginUseCase.Command(
+            SocialLogin.Command(
                 provider = provider,
                 authorizationCode = code,
             )
         )
 
         return when (result) {
-            is UserSocialLoginUseCase.Result.Success -> SocialLoginResponse.Success(
+            is SocialLogin.Result.Success -> SocialLoginResponse.Success(
                 accessToken = result.accessToken,
                 refreshToken = result.refreshToken,
             )
 
-            is UserSocialLoginUseCase.Result.UserNotRegistered -> SocialLoginResponse.UserNotRegistered(
+            is SocialLogin.Result.UserNotRegistered -> SocialLoginResponse.UserNotRegistered(
                 provider = result.provider,
                 email = result.email,
                 name = result.name,

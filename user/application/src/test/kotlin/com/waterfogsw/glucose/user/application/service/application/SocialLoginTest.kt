@@ -4,8 +4,8 @@ import com.waterfogsw.glucose.support.common.vo.Email
 import com.waterfogsw.glucose.support.jwt.util.JwtTokenProvider
 import com.waterfogsw.glucose.user.application.common.security.UserJwtTokenServiceFake
 import com.waterfogsw.glucose.user.application.port.SocialLoginPortStub
-import com.waterfogsw.glucose.user.application.port.inbound.UserSocialLoginUseCase
-import com.waterfogsw.glucose.user.application.service.applicaiton.UserSocialLoginApplicationService
+import com.waterfogsw.glucose.user.application.port.inbound.SocialLogin
+import com.waterfogsw.glucose.user.application.service.applicaiton.SocialLoginService
 import com.waterfogsw.glucose.user.application.service.domain.UserDomainServiceSpy
 import com.waterfogsw.glucose.user.application.service.domain.UserSocialLoginInfoDomainServiceSpy
 import com.waterfogsw.glucose.user.domain.entity.User
@@ -14,28 +14,28 @@ import com.waterfogsw.glucose.user.domain.enums.Provider
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 
-class UserSocialLoginApplicationServiceTest : DescribeSpec({
+class SocialLoginTest : DescribeSpec({
 
-    describe("유저 소셜 로그인 유스케이스") {
+    describe("유저 소셜 로그인") {
 
         context("유저가 가입되어있지 않으면") {
 
             it("가입을 위한 사용자 정보를 반환한다.") {
                 // arrange
-                val sut = UserSocialLoginApplicationService(
+                val sut = SocialLoginService(
                     oidcPort = SocialLoginPortStub(),
                     userSocialLoginInfoDomainService = UserSocialLoginInfoDomainServiceSpy(),
                     userDomainService = UserDomainServiceSpy(),
                     userJwtTokenService = UserJwtTokenServiceFake(),
                 )
                 val provider = Provider.KAKAO
-                val command = UserSocialLoginUseCase.Command("test", provider)
+                val command = SocialLogin.Command("test", provider)
 
                 // act
-                val result: UserSocialLoginUseCase.Result = sut.invoke(command)
+                val result: SocialLogin.Result = sut.invoke(command)
 
                 // assert
-                check(result is UserSocialLoginUseCase.Result.UserNotRegistered)
+                check(result is SocialLogin.Result.UserNotRegistered)
                 result.provider shouldBe provider
                 result.email shouldBe Email("test@test.com")
                 result.name shouldBe "test"
@@ -59,19 +59,19 @@ class UserSocialLoginApplicationServiceTest : DescribeSpec({
 
             it("로그인 토큰을 반환한다.") {
                 // arrange
-                val sut = UserSocialLoginApplicationService(
+                val sut = SocialLoginService(
                     oidcPort = SocialLoginPortStub(),
                     userSocialLoginInfoDomainService = userSocialLoginInfoDomainService,
                     userDomainService = userDomainService,
                     userJwtTokenService = UserJwtTokenServiceFake(),
                 )
-                val command = UserSocialLoginUseCase.Command("test", provider)
+                val command = SocialLogin.Command("test", provider)
 
                 // act
-                val result: UserSocialLoginUseCase.Result = sut.invoke(command)
+                val result: SocialLogin.Result = sut.invoke(command)
 
                 // assert
-                check(result is UserSocialLoginUseCase.Result.Success)
+                check(result is SocialLogin.Result.Success)
                 JwtTokenProvider.verifyToken(result.accessToken)
                     .getOrNull()!!.customClaims["type"] shouldBe "access"
                 JwtTokenProvider.verifyToken(result.refreshToken)

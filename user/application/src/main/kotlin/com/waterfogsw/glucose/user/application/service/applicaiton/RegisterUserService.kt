@@ -1,18 +1,18 @@
 package com.waterfogsw.glucose.user.application.service.applicaiton
 
-import com.waterfogsw.glucose.user.application.port.inbound.UserRegisterUseCase
+import com.waterfogsw.glucose.user.application.port.inbound.RegisterUser
 import com.waterfogsw.glucose.user.application.service.domain.UserDomainService
 import com.waterfogsw.glucose.user.application.service.domain.UserSocialLoginInfoDomainService
 import com.waterfogsw.glucose.user.domain.entity.User
 import org.springframework.stereotype.Service
 
 @Service
-class UserRegisterApplicationService(
+class RegisterUserService(
     private val userDomainService: UserDomainService,
     private val userSocialLoginInfoDomainService: UserSocialLoginInfoDomainService,
-) : UserRegisterUseCase {
+) : RegisterUser {
 
-    override fun invoke(command: UserRegisterUseCase.Command): UserRegisterUseCase.Result {
+    override fun invoke(command: RegisterUser.Command): RegisterUser.Result {
         val user: User = userDomainService.create(
             name = command.name,
             email = command.email,
@@ -25,7 +25,7 @@ class UserRegisterApplicationService(
             provider = command.provider,
         )
 
-        return UserRegisterUseCase.Result.Success(userId = user.id)
+        return RegisterUser.Result.Success(userId = user.id)
     }
 
 }

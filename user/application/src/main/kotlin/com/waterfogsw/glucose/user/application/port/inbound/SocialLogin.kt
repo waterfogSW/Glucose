@@ -5,7 +5,7 @@ import com.waterfogsw.glucose.support.common.vo.URL
 import com.waterfogsw.glucose.user.domain.enums.Provider
 
 
-fun interface UserSocialLoginUseCase {
+fun interface SocialLogin {
 
     fun invoke(command: Command): Result
 
