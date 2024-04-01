@@ -19,11 +19,14 @@ h2 = "2.2.224"
 jackson = "2.16.1"
 auth0-java-jwt = "4.4.0"
 auth0-jwks-rsa = "0.22.1"
+kotlin-logging = "6.0.3"
 
 [libraries]
 
 kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
 kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version.ref = "kotlin-logging" }
+
 spring-boot = { group = "org.springframework.boot", name = "spring-boot", version.ref = "spring-boot" }
 spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web", version.ref = "spring-boot" }
 spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test", version.ref = "spring-boot" }

@@ -33,18 +33,11 @@ subprojects {
     dependencies {
         implementation(rootProject.libs.kotlin.stdlib)
         implementation(rootProject.libs.kotlin.reflect)
-
+        implementation(rootProject.libs.kotlin.logging)
         implementation(rootProject.libs.jackson.module.kotlin)
         implementation(rootProject.libs.jackson.databind)
 
         annotationProcessor(rootProject.libs.spring.boot.configuration.processor)
-
-        testImplementation(rootProject.libs.mockk)
-        testImplementation(rootProject.libs.spring.mockk)
-        testImplementation(rootProject.libs.kotest.runner.junit5)
-        testImplementation(rootProject.libs.kotest.assertions.core)
-        testImplementation(rootProject.libs.kotest.extensions.spring)
-        testImplementation(rootProject.libs.spring.boot.starter.test)
 
         testImplementation(rootProject.libs.mockk)
         testImplementation(rootProject.libs.spring.mockk)

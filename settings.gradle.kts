@@ -12,20 +12,20 @@ project(":support:jwt").projectDir = file("support/jwt")
 /**
  * user
  */
-include(":user:domain")
-project(":user:domain").projectDir = file("user/domain")
+include(":domain")
+project(":domain").projectDir = file("domain")
 
-include(":user:application")
-project(":user:application").projectDir = file("user/application")
+include(":application")
+project(":application").projectDir = file("application")
 
-include(":user:bootstrap:http")
-project(":user:bootstrap:http").projectDir = file("user/bootstrap/http")
+include(":bootstrap:http")
+project(":bootstrap:http").projectDir = file("bootstrap/http")
 
-include(":user:infrastructure:persistence")
-project(":user:infrastructure:persistence").projectDir = file("user/infrastructure/persistence")
+include(":infrastructure:persistence")
+project(":infrastructure:persistence").projectDir = file("infrastructure/persistence")
 
-include(":user:infrastructure:redis")
-project(":user:infrastructure:redis").projectDir = file("user/infrastructure/redis")
+include(":infrastructure:redis")
+project(":infrastructure:redis").projectDir = file("infrastructure/redis")
 
-include(":user:infrastructure:client")
-project(":user:infrastructure:client").projectDir = file("user/infrastructure/client")
+include(":infrastructure:client")
+project(":infrastructure:client").projectDir = file("infrastructure/client")
