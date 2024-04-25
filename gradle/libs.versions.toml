@@ -29,8 +29,10 @@ kotlin-logging = { group = "io.github.oshai", name = "kotlin-logging", version.r
 
 spring-boot = { group = "org.springframework.boot", name = "spring-boot", version.ref = "spring-boot" }
 spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web", version.ref = "spring-boot" }
+spring-boot-starter-websocket = { group = "org.springframework.boot", name = "spring-boot-starter-websocket", version.ref = "spring-boot" }
 spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test", version.ref = "spring-boot" }
 spring-boot-starter-data-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa", version.ref = "spring-boot" }
+spring-boot-starter-data-redis = { group = "org.springframework.boot", name = "spring-boot-starter-data-redis", version.ref = "spring-boot" }
 
 spring-boot-devtools = { group = "org.springframework.boot", name = "spring-boot-devtools", version.ref = "spring-boot" }
 spring-boot-docker-compose = { group = "org.springframework.boot", name = "spring-boot-docker-compose", version.ref = "spring-boot" }

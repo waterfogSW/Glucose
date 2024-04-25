@@ -3,6 +3,7 @@ package com.waterfogsw.glucose.bootstrap
 import com.waterfogsw.glucose.application.user.common.config.ApplicationConfig
 import com.waterfogsw.glucose.infrastructure.client.common.config.ClientConfig
 import com.waterfogsw.glucose.infrastructure.common.config.PersistenceConfig
+import com.waterfogsw.gluecose.inrastructure.common.config.RedisConfig
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Import
@@ -13,6 +14,7 @@ import java.util.*
     ApplicationConfig::class,
     PersistenceConfig::class,
     ClientConfig::class,
+    RedisConfig::class,
 )
 class Application
 

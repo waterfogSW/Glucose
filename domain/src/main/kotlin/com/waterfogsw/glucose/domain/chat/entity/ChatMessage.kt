@@ -7,6 +7,7 @@ data class ChatMessage(
     val id: UUID = UuidCreator.create(),
     val type: Type,
     val content: String,
+    val senderId: String,
 ) {
 
     enum class Type {
@@ -17,11 +18,13 @@ data class ChatMessage(
 
         fun create(
             type: Type = Type.TEXT,
+            senderId: String,
             content: String,
         ): ChatMessage {
             return ChatMessage(
                 type = type,
                 content = content,
+                senderId = senderId,
             )
         }
     }
